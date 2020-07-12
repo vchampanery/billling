@@ -52,7 +52,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+<!--          <li class="nav-item">
             <a class="nav-link" href="{{ route('users.index') }}">
               
             <i class="nav-icon fas fa-th"></i> 
@@ -67,7 +67,7 @@
             Manage roles
             <span class="right badge badge-danger">New</span></a>
            
-          </li>
+          </li>-->
           <li class="nav-item">
             <a class="nav-link" href="{{ route('billing.show') }}">
               
@@ -77,7 +77,7 @@
            
           </li>
           
-          <li class="nav-item">
+<!--          <li class="nav-item">
             <a class="nav-link" href="{{ route('patient.show') }}">
               
             <i class="nav-icon fas fa-th"></i> 
@@ -120,7 +120,7 @@
                       <span class="right badge badge-danger">view</span>
                   </p>
               </a>
-          </li>
+          </li>-->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

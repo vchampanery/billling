@@ -73,6 +73,11 @@
                 {data: 'biiling_date', name: 'biiling_date'},
                 {data: 'units_visits_billed', name: 'units_visits_billed'},
                 {data: 'charges_billed', name: 'charges_billed'},
+                {data: 'denied_count'},    
+                {data: 'denied_count', name: 'denied_count' },                             
+                {data: 'rejection_count', name: 'rejection_count' },
+                {data: 'insurance_unbilled_amount_unbillied', name: 'insurance_unbilled_amount_unbillied' },      
+                {data: 'insurance_unbilled_amount_unbillied_per', name: 'insurance_unbilled_amount_unbillied_per' },  
                 {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
         });
