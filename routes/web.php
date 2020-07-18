@@ -47,7 +47,7 @@ Route::prefix('patient')->group(function () {
 });
 
 Route::prefix('billing')->group(function () {
-   Route::get('show','BillingController@show')->name('billing.show');
+   Route::post('show','BillingController@show')->name('billing.show');
    Route::get('create','BillingController@create')->name('billing.create');
    Route::post('store','BillingController@store')->name('billing.store');
 });

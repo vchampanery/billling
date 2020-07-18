@@ -37,7 +37,7 @@
         <div class="form-group">
             <div class="row">
                 @foreach($fields as $key => $value)
-                    <div class="col-xs-2 col-sm-2 col-md-2">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
                         <strong>{{trans('billing.'.$value)}}</strong>
                         @if(
                         ($value == 'insurance_unbilled_amount_unbillied_per') ||
@@ -62,11 +62,34 @@
                         ($value == 'insurance_patient_unbilled_onetwenty') ||
                         ($value == 'daily_total_collection') 
                         )
-                        <input type='text' class='form-control' disabled id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="0" >
-                            
+                        @php 
+                            $symbol = '';
+                            if(strpos($value,'_per')){
+                                $symbol = '%';
+                            } else {
+                                $symbol = '$';
+                            }
+                        @endphp
+                        <div class="input-group">
+                            @if($symbol == '$')
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">{{$symbol}}</div>
+                                </div>
+                            @endif
+                            <input type='text' class='form-control' disabled id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="0" >
+                            @if($symbol == '%')
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">{{$symbol}}</div>
+                                </div>
+                            @endif
+                        </div>
                         @else
-                        <input type='text' class='form-control' id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="0">
-                            
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                                <input type='text' class='form-control' id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="0">
+                            </div>
                         @endif
                         
                     </div>
@@ -85,15 +108,33 @@
 
 @endsection
 
+@section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <script type="text/javascript">  
-    jQuery('#startdate').datepicker({ 
+    $('#biiling_date').datepicker({ 
         autoclose: true,   
-        format: 'yyyy-mm-dd'  
+        format: 'yyyy-M-dd'  
     });
+//    jQuery( ".form-control" ).blur(function() {
+//        this.value = 
+//        console.dir(this.value);
+//    });
+    function setDecimalValu(vlu){
+        return parseFloat(vlu).toFixed(2);
+    }
     function testthis(key){
         var id = key.name;
+        if(id == 'biiling_date'){
+            return true;
+        }
         //insurance  start
-        console.dir(id);
+        var vv = $('#'+id).val();
+        vv1 = parseFloat(vv).toFixed(2);
+        $('#'+id).val(vv1);
+
+//        console.dir(id);
         if( ( id == "insurance_unbilled_amount_thirty") ||
             ( id == "insurance_unbilled_amount_sixty") ||
             ( id == "insurance_unbilled_amount_ninety") ||
@@ -109,14 +150,15 @@
            var a5 = parseFloat(jQuery("#insurance_unbilled_amount_onetwentyone").val());
            var a6 = parseFloat(jQuery("#insurance_unbilled_amount_unbillied").val());   
             
-            console.log(a1);
-            console.log(a2);
-            console.log(a3);
-            console.log(a4);
-            console.log(a5);
-            console.log(a6);
+//            console.log(a1);
+//            console.log(a2);
+//            console.log(a3);
+//            console.log(a4);
+//            console.log(a5);
+//            console.log(a6);
             var s = a1 + a2 + a3 + a4 + a5 + a6;
-            console.dir(s);
+//            console.dir(s);
+             var s = setDecimalValu(s);
             jQuery('#insurance_unbilled_amount_total').val(s);
             id = 'insurance_unbilled_amount_total';
         }
@@ -126,44 +168,51 @@
             var a1 = jQuery('#insurance_unbilled_amount_unbillied').val();
             var a2 = jQuery('#insurance_unbilled_amount_onetwenty_per').val();
             var s = (a1*10000) / a2 ;
-            jQuery('#insurance_unbilled_amount_unbillied_per').val(s+'%');
+            s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_unbillied_per').val(s);
         }
         if(( id == "insurance_unbilled_amount_thirty") ||  ( id == "insurance_unbilled_amount_total")){
             var a1 = jQuery('#insurance_unbilled_amount_thirty').val();
             var a2 = jQuery('#insurance_unbilled_amount_total').val();
             var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#insurance_unbilled_amount_thirty_per').val(s+'%');
+            s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_thirty_per').val(s);
         }
         if(( id == "insurance_unbilled_amount_sixty") ||  ( id == "insurance_unbilled_amount_total")){
             var a1 = jQuery('#insurance_unbilled_amount_sixty').val();
             var a2 = jQuery('#insurance_unbilled_amount_total').val();
             var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#insurance_unbilled_amount_sixty_per').val(s+'%');
+            s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_sixty_per').val(s);
         }
         if(( id == "insurance_unbilled_amount_ninety") ||  ( id == "insurance_unbilled_amount_total")){
             var a1 = jQuery('#insurance_unbilled_amount_ninety').val();
             var a2 = jQuery('#insurance_unbilled_amount_total').val();
              var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#insurance_unbilled_amount_ninety_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_ninety_per').val(s);
         }
         if(( id == "insurance_unbilled_amount_onetwenty") ||  ( id == "insurance_unbilled_amount_total")){
             var a1 = jQuery('#insurance_unbilled_amount_onetwenty').val();
             var a2 = jQuery('#insurance_unbilled_amount_total').val();
              var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#insurance_unbilled_amount_onetwenty_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_onetwenty_per').val(s);
         }
          if(( id == "insurance_unbilled_amount_unbillied") ||  ( id == "insurance_unbilled_amount_onetwenty_per") ||  ( id == "insurance_unbilled_amount_total")){
             var a1 = parseFloat(jQuery('#insurance_unbilled_amount_unbillied').val());
             var a2 = parseFloat(jQuery('#insurance_unbilled_amount_onetwenty_per').val());
 //             var s = parseInt((a1*10000) / a2 )/100;
              var s = parseInt((a1*10000) / a2 );
-            jQuery('#insurance_unbilled_amount_unbillied_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_unbillied_per').val(s);
         }
         if(( id == "insurance_unbilled_amount_onetwentyone") ||  ( id == "insurance_unbilled_amount_total")){
             var a1 = jQuery('#insurance_unbilled_amount_onetwentyone').val();
             var a2 = jQuery('#insurance_unbilled_amount_total').val();
              var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#insurance_unbilled_amount_onetwentyone_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_onetwentyone_per').val(s);
         }
         //total per
         if(( id == "insurance_unbilled_amount_onetwenty_per") ||  ( id == "insurance_unbilled_amount_total")){
@@ -174,7 +223,8 @@
             var a5 = parseFloat(jQuery("#insurance_unbilled_amount_onetwentyone_per").val());
             var a6 = parseFloat(jQuery("#insurance_unbilled_amount_unbillied_per").val());   
              var s = a1 + a2 + a3 + a4 + a5 + a6;
-            jQuery('#insurance_unbilled_amount_total_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#insurance_unbilled_amount_total_per').val(s);
         }
         //insurance  end
         //patient  start
@@ -194,7 +244,7 @@
            var a6 = parseFloat(jQuery("#patient_unbilled_amount_unbillied").val());   
 
             var s = a1 + a2 + a3 + a4 + a5 + a6;
-
+            s = setDecimalValu(s);
             jQuery('#patient_unbilled_amount_total').val(s);
             id = 'patient_unbilled_amount_total';
         }
@@ -204,44 +254,51 @@
             var a1 = jQuery('#patient_unbilled_amount_unbillied').val();
             var a2 = jQuery('#patient_unbilled_amount_onetwenty_per').val();
             var s = (a1*10000) / a2 ;
-            jQuery('#patient_unbilled_amount_unbillied_per').val(s+'%');
+            s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_unbillied_per').val(s);
         }
         if(( id == "patient_unbilled_amount_thirty") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = jQuery('#patient_unbilled_amount_thirty').val();
             var a2 = jQuery('#patient_unbilled_amount_total').val();
             var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#patient_unbilled_amount_thirty_per').val(s+'%');
+            s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_thirty_per').val(s);
         }
         if(( id == "patient_unbilled_amount_sixty") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = jQuery('#patient_unbilled_amount_sixty').val();
             var a2 = jQuery('#patient_unbilled_amount_total').val();
             var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#patient_unbilled_amount_sixty_per').val(s+'%');
+            s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_sixty_per').val(s);
         }
         if(( id == "patient_unbilled_amount_ninety") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = jQuery('#patient_unbilled_amount_ninety').val();
             var a2 = jQuery('#patient_unbilled_amount_total').val();
              var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#patient_unbilled_amount_ninety_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_ninety_per').val(s);
         }
         if(( id == "patient_unbilled_amount_onetwenty") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = jQuery('#patient_unbilled_amount_onetwenty').val();
             var a2 = jQuery('#patient_unbilled_amount_total').val();
              var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#patient_unbilled_amount_onetwenty_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_onetwenty_per').val(s);
         }
          if(( id == "patient_unbilled_amount_unbillied") ||  ( id == "patient_unbilled_amount_onetwenty_per") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = parseFloat(jQuery('#patient_unbilled_amount_unbillied').val());
             var a2 = parseFloat(jQuery('#patient_unbilled_amount_onetwenty_per').val());
 //             var s = parseInt((a1*10000) / a2 )/100;
              var s = parseInt((a1*10000) / a2 );
-            jQuery('#patient_unbilled_amount_unbillied_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_unbillied_per').val(s);
         }
         if(( id == "patient_unbilled_amount_onetwentyone") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = jQuery('#patient_unbilled_amount_onetwentyone').val();
             var a2 = jQuery('#patient_unbilled_amount_total').val();
              var s = parseInt((a1*10000) / a2 )/100;
-            jQuery('#patient_unbilled_amount_onetwentyone_per').val(s+'%');
+             s = setDecimalValu(s);
+            jQuery('#patient_unbilled_amount_onetwentyone_per').val(s);
         }
         //total per
         if(( id == "patient_unbilled_amount_onetwenty_per") ||  ( id == "patient_unbilled_amount_total")){
@@ -252,17 +309,18 @@
             var a5 = parseFloat(jQuery("#patient_unbilled_amount_onetwentyone_per").val());
             var a6 = parseFloat(jQuery("#patient_unbilled_amount_unbillied_per").val());   
              var s = a1 + a2 + a3 + a4 + a5 + a6;
+             s = setDecimalValu(s);
             jQuery('#patient_unbilled_amount_total_per').val(s+'%');
         }
         //patient  end
 
         //Insurance + Patient
-        console.dir(id);
+//        console.dir(id);
         if(( id == "insurance_unbilled_amount_thirty") ||  ( id == "patient_unbilled_amount_thirty") ||  ( id == "insurance_unbilled_amount_total") ||  ( id == "patient_unbilled_amount_total")){
             var a1 = parseInt(jQuery('#insurance_unbilled_amount_thirty').val());
             var a2 = parseInt(jQuery('#patient_unbilled_amount_thirty').val());
             var s = a1 + a2;
-            
+             s = setDecimalValu(s);
             jQuery('#insurance_patient_unbilled_thirty').val(s);
         }
         
@@ -270,6 +328,7 @@
             var a1 = parseInt(jQuery('#insurance_unbilled_amount_sixty').val());
             var a2 = parseInt(jQuery('#patient_unbilled_amount_sixty').val());
             var s = a1 + a2;
+             s = setDecimalValu(s);
             jQuery('#insurance_patient_unbilled_sixty').val(s);
         }
         
@@ -277,6 +336,7 @@
             var a1 = parseInt(jQuery('#insurance_unbilled_amount_ninety').val());
             var a2 = parseInt(jQuery('#patient_unbilled_amount_ninety').val());
             var s = a1 + a2;
+             s = setDecimalValu(s);
             jQuery('#insurance_patient_unbilled_ninety').val(s);
         }
         
@@ -284,6 +344,7 @@
             var a1 = parseInt(jQuery('#insurance_unbilled_amount_onetwenty').val());
             var a2 = parseInt(jQuery('#patient_unbilled_amount_onetwenty').val());
             var s = a1 + a2;
+             s = setDecimalValu(s);
             jQuery('#insurance_patient_unbilled_onetwenty').val(s);
         }
         
@@ -291,14 +352,18 @@
             var a1 = parseInt(jQuery('#insurance_unbilled_amount_onetwentyone').val());
             var a2 = parseInt(jQuery('#patient_unbilled_amount_onetwentyone').val());
             var s = a1 + a2;
+             s = setDecimalValu(s);
             jQuery('#insurance_patient_unbilled_onetwenty').val(s);
         }
         if(( id == "daily_insurance_collection") ||  ( id == "daily_patient_collection")){
             var a1 = parseFloat(jQuery('#daily_insurance_collection').val());
             var a2 = parseFloat(jQuery('#daily_patient_collection').val());
             var s = a1 + a2;
+             s = setDecimalValu(s);
             jQuery('#daily_total_collection').val(s);
         }
     }
     
 </script>
+
+@endsection

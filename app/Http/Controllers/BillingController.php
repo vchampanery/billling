@@ -93,7 +93,9 @@ class BillingController extends Controller
     {
         $data = request()->all();
         BillingMaster::create($data);
-        return view('billing.show');
+          $fields = $this->fields;
+          
+        return view('billing.show',compact('fields'));
     }
 
     /**
@@ -108,7 +110,7 @@ class BillingController extends Controller
         if ($request->ajax()) {
 
             $data = BillingMaster::latest()->get($fields);
-          
+            
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
