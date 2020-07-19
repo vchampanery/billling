@@ -76,9 +76,10 @@ class BillingController extends Controller
      */
     public function create()
     {
+        $action = 'add';
         $permission = Permission::get();
         $fields = $this->fields;
-        return view('billing.create',compact('permission','fields'));
+        return view('billing.create',compact('permission','fields','action'));
         
 //        return view('patient.show');
     }
