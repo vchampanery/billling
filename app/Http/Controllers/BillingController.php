@@ -92,9 +92,14 @@ class BillingController extends Controller
     public function store(Request $request)
     {
         $data = request()->all();
-        BillingMaster::create($data);
-          $fields = $this->fields;
-          
+        if($data['action'] == 'edit'){
+            unset($data['_token']);
+            unset($data['action']);
+            BillingMaster::where('billing_master_id', '=', $data['billing_master_id'])->update($data);
+        } else {
+            BillingMaster::create($data);
+        }
+        $fields = $this->fields;
         return view('billing.show',compact('fields'));
     }
 
@@ -108,7 +113,7 @@ class BillingController extends Controller
          $fields = $this->fields;
 //         dd("tes");
         if ($request->ajax()) {
-
+            $fields[]='billing_master_id';
             $data = BillingMaster::latest()->get($fields);
             
             return Datatables::of($data)
@@ -129,9 +134,17 @@ class BillingController extends Controller
      * @param  \App\Model\PatientMaster  $patientMaster
      * @return \Illuminate\Http\Response
      */
-    public function edit(PatientMaster $patientMaster)
+    public function edit($customer_id)
     {
-        //
+        
+        $action = 'Edit';
+        $permission = Permission::get();
+        $fields = $this->fields;
+         $fields[]='billing_master_id';
+        $billingmaster = BillingMaster::where('billing_master_id',$customer_id)->first($fields)->toArray();
+       
+        return view('billing.create',compact('permission','fields','billingmaster','action'));
+
     }
 
     /**

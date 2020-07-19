@@ -60,6 +60,7 @@ return [
     'master_month_to_date' => 'Month to Date',
     'master_app_to_pay' => 'App to Pay',
     'master_year_to_date' => 'Year to Date',
+    'billing_master_id' => 'System Id',
     
 
 ];

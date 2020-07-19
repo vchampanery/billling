@@ -47,11 +47,11 @@ Route::prefix('patient')->group(function () {
 });
 
 Route::prefix('billing')->group(function () {
-   Route::post('show','BillingController@show')->name('billing.show');
+   Route::any('show','BillingController@show')->name('billing.show');
    Route::get('create','BillingController@create')->name('billing.create');
    Route::post('store','BillingController@store')->name('billing.store');
+   Route::get('edit/{id}','BillingController@edit')->name('billing.edit');
 });
-
 
 Route::prefix('medician')->group(function () {
    Route::get('show','MedicianController@show')->name('medician.show');

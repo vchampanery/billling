@@ -41,6 +41,7 @@
 <!--datatable start-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
@@ -54,6 +55,8 @@
 	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
 <!--datatable stop-->
    
 
@@ -61,6 +64,7 @@
         var vArray = [];
         @foreach($fields as $key => $vl)
         var vl = '{{$vl}}';
+        var editrout = '{{ url('billing/edit')}}';
         vArray.push(vl);
 //            console.dir(vl);
         @endforeach
@@ -75,7 +79,11 @@
             serverSide: true,
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'copy', 'csv', 'excel', 'pdf',
+                 {
+            extend: 'colvis',
+            columns: ':not(:first-child)'
+        }
             ],
             ajax: {
                 "data": {"_token": ee},
@@ -137,8 +145,24 @@
                 {data: 'master_app_to_pay'                            ,name: 'master_app_to_pay'                        },
                 {data: 'master_year_to_date'      ,name: 'master_year_to_date'  },
                 {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
-        });
+        ],
+        columnDefs: [{
+                'targets': 1,
+                'searchable': false,
+                'orderable': false,
+                'render': function (data, type, full, meta){
+                    console.dir("data");
+                    console.dir(data);
+                    console.dir("type");
+                    console.dir(type);
+                    console.dir("full");
+                    console.dir(full);
+                    console.dir("meta");
+                    console.dir(meta);
+                     return '<a href="'+editrout+'/'+full.billing_master_id+'">'+data+'</a>';
+//                    return  '<input class="alarm-checkbox " name="project_complience_id[]" id="project_complience_id" value="'+ full.compliance_id +'" type="checkbox"  onclick="return insertValue(this);">';
+                }
+            }]});
     } );
    </script>
 @endsection

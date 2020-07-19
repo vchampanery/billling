@@ -4,7 +4,12 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Patient</h2>
+            @if( $action == 'Edit' )
+                <h2>Edit Patient</h2>
+            @else
+                <h2>Create New Patient</h2>
+            @endif
+            
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('billing.show') }}"> Back</a>
@@ -31,8 +36,13 @@
 
 @endphp
 <div class="row"> 
-   
-   
+            @if( $action == 'Edit' )
+                <input type='hidden' name='action' id='action' value='edit'>
+                <input type='hidden' name='billing_master_id' id='billing_master_id' value='{{$billingmaster['billing_master_id']}}'>
+            @else
+                <input type='hidden' name='action' id='action' value='add'>
+            @endif
+    
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <div class="row">
@@ -60,7 +70,8 @@
                         ($value == 'insurance_patient_unbilled_sixty') ||
                         ($value == 'insurance_patient_unbilled_ninety') ||
                         ($value == 'insurance_patient_unbilled_onetwenty') ||
-                        ($value == 'daily_total_collection') 
+                        ($value == 'daily_total_collection') || 
+                        ($value == 'billing_master_id') 
                         )
                         @php 
                             $symbol = '';
@@ -76,7 +87,10 @@
                                     <div class="input-group-text">{{$symbol}}</div>
                                 </div>
                             @endif
-                            <input type='text' class='form-control' disabled id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="0" >
+                            @php
+                                $val = isset($billingmaster[$value])?$billingmaster[$value]:0;
+                            @endphp
+                            <input type='text' class='form-control' disabled id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="{{$val}}" >
                             @if($symbol == '%')
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">{{$symbol}}</div>
@@ -88,7 +102,10 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">$</div>
                                 </div>
-                                <input type='text' class='form-control' id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="0">
+                                @php
+                                    $val = isset($billingmaster[$value])?$billingmaster[$value]:0;
+                                @endphp
+                                <input type='text' class='form-control' id='{{$value}}' name='{{$value}}' onchange="testthis({{$value}});" value="{{$val}}">
                             </div>
                         @endif
                         
