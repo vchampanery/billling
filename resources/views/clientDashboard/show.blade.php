@@ -227,13 +227,13 @@ function example(count) {
         "bLengthChange": false,
 //        "aLengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]],
         "iDisplayLength": 30,
-//        dom: 'lBfrtip',
-//            buttons: [
-//                'excel'
-////                 {
-////            extend: 'colvis',
-////            columns: ':not(:first-child)'
-//        ],
+        dom: 'lBfrtip',
+            buttons: [
+                'excel'
+//                 {
+//            extend: 'colvis',
+//            columns: ':not(:first-child)'
+        ],
 //            "footerCallback": function ( row, data, start, end, display ) {
 //            var api = this.api(), data;
 //            // converting to interger to find total
