@@ -184,7 +184,7 @@ class ClientController extends Controller
         $userSelectedList =[];
         if($userAssignMaster){
             foreach($userAssignMaster as $uamK => $uamY){
-                $userSelectedList[] = $uamY['user_master_id'];
+                $userSelectedList[] = isset($uamY['user_master_id'])?$uamY['user_master_id']:null;
             }
         }
         return view('client.create',compact('permission','fields','action','clientMaster','userAssignMaster','userList','softwareList'));
