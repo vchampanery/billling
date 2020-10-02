@@ -182,9 +182,11 @@ class ClientController extends Controller
         $userList = User::where('email', '<>','vt@gmail.com')->get()->toArray();
         $softwareList = SoftwareMaster::all()->toArray();
         $userSelectedList =[];
+//        dd($userAssignMaster);
         if($userAssignMaster){
             foreach($userAssignMaster as $uamK => $uamY){
-                $userSelectedList[] = isset($uamY['user_master_id'])?$uamY['user_master_id']:null;
+                
+                $userSelectedList[] = $uamY;
             }
         }
         return view('client.create',compact('permission','fields','action','clientMaster','userAssignMaster','userList','softwareList'));
