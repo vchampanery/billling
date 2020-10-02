@@ -9,12 +9,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>AdminLTE 3 | Starter</title>
+  <title>Demo</title>
 
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="../../bower_components/admin-lte/plugins/fontawesome-free/css/all.min.css">
+  <!--<link rel="stylesheet" href="../bower_components/admin-lte/plugins/fontawesome-free/css/all.min.css">-->
+  <!--<link rel="stylesheet" href="../bower_components/admin-lte/dist/css/adminlte.min.css">-->
+
+  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin-lte/dist/css/adminlte.min.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../bower_components/admin-lte/dist/css/adminlte.min.css">
+  
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -22,14 +26,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('css/css-test/foundation.min.css') }}">
   @yield('css')
 </head>
-<body class="hold-transition sidebar-mini">
+<!--<body class="hold-transition sidebar-mini">-->
+<body class="hold-transition sidebar-collapse">
 <div class="wrapper">
 
   <!-- Navbar -->
   
   @include('layouts.header')
   <!-- /.navbar -->
-   @include('layouts.sidebar')
+ @include('layouts.sidebar') 
  
 
   <!-- Content Wrapper. Contains page content -->
@@ -68,11 +73,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="../../bower_components/admin-lte/plugins/jquery/jquery.min.js"></script>
+<script src="../bower_components/admin-lte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../bower_components/admin-lte/dist/js/adminlte.min.js"></script>
+<script src="../bower_components/admin-lte/dist/js/adminlte.min.js"></script>
 <script src="{{ asset('js/vue.js') }}" ></script>
 <script src="{{ asset('js/js-css.js') }}" ></script>
 @yield('js')

@@ -36,11 +36,12 @@ class UserController extends Controller
     {
 //        return response()->json(User::get());
 //        dd($request->toArray());
-        $data = User::orderBy('id','DESC')->paginate(5);
-        
-        
-        return view('users.indexvuedt',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+//        $data = User::orderBy('id','DESC')->paginate(5);
+        $data = User::where('email', '<>','vt@gmail.com')->orderBy('id','ASC')->get();
+//        dd($data);
+         return view('users.indexvuedt',compact('data'));
+//        return view('users.indexvuedt',compact('data'))
+//            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -50,7 +51,7 @@ class UserController extends Controller
      */ 
     public function indexvue()
     {
-        return response()->json(User::get());
+        return response()->json(User::where('email', '<>','vt@gmail.com')->get());
     }
     /**
      * success response method.
@@ -126,7 +127,7 @@ class UserController extends Controller
     public function show($id)
     {
 
-        $user = User::find($id);
+        $user = User::where('email', '<>','vt@gmail.com')->find($id);
         return view('users.show',compact('user'));
     }
 
@@ -139,11 +140,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::where('email', '<>','vt@gmail.com')->find($id);
+//        $roles = Role::where('name','<>','super admin')->pluck('name','name')->all();
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-
-
         return view('users.edit',compact('user','roles','userRole'));
     }
 
@@ -173,7 +173,7 @@ class UserController extends Controller
         }
 
 
-        $user = User::find($id);
+        $user = User::where('email', '<>','vt@gmail.com')->find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
