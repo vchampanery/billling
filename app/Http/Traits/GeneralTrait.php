@@ -166,7 +166,7 @@ trait GeneralTrait
                 //unbilled amount %
                 $data[112] =round($data[111]/$data[113]*100,2);
                 //total
-                $data[113] =$data[104]+$data[106]+$data[108]+$data[110]+$data[112];
+                $data[114] =$data[104]+$data[106]+$data[108]+$data[110]+$data[112];
                 
             } else {
                 //$data[8] = round($data[7]/$data[17]*100,2);
@@ -183,6 +183,7 @@ trait GeneralTrait
                 $data[113] =round(0,2);
             }
     //Insurance + Patient AR Total
+            $data[122]=$data[120]+$data[121];
             $data[115]=$data[91]+$data[103];
             $data[116]=$data[93]+$data[105];
             $data[117]=$data[95]+$data[107];
