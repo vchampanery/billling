@@ -70,7 +70,7 @@ class UserAssignController extends Controller
         $data = [];
         $action = 'reassign';
         
-        return view('userassign.reassign',compact('userList','action'));
+        return view('userAssign.reassign',compact('userList','action'));
     }
 
     public function getclient(Request $request) {

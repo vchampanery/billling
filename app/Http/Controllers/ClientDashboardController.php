@@ -191,7 +191,6 @@ class ClientDashboardController extends Controller
                         
                     }
                 }
-                dd($reportAry);
             }
             return redirect()->route('clientdashboard.show')->with('success','Entry Generated successfully');
         }   else {
