@@ -37,7 +37,7 @@ class ClientDashboardController extends Controller
         $fields = $this->fields;
 //        $action = 'add';
         $action = 'edit';
-        return view('clientdashboard.create',compact('permission','fields','action'));
+        return view('clientDashboard.create',compact('permission','fields','action'));
         
 //        return view('patient.show');
     }
@@ -144,7 +144,7 @@ class ClientDashboardController extends Controller
         //client list 
         $clientList = ClientMaster::all()->toArray();
         $fieldsArray = $newFA;
-        return view('clientdashboard.show',compact('list','fieldsArray','clientList','client','range'));
+        return view('clientDashboard.show',compact('list','fieldsArray','clientList','client','range'));
     }
     
     
@@ -196,7 +196,7 @@ class ClientDashboardController extends Controller
             return redirect()->route('clientdashboard.show')->with('success','Entry Generated successfully');
         }   else {
             $clientList = ClientMaster::all()->toArray();
-             return view('clientdashboard.generateentry',compact('action','clientList'));
+             return view('clientDashboard.generateentry',compact('action','clientList'));
         }
     }
     
@@ -409,7 +409,7 @@ class ClientDashboardController extends Controller
 //        $billingmaster = ModuleMaster::where('module_master_id',$customer_id)->first($fields)->toArray();
         
 //        return view('clientdashboard.create',compact('permission','fields','action','billingmaster'));
-        return view('clientdashboard.create',compact('action','software_field_master_id','swMstrId','newFA','clientId'));
+        return view('clientDashboard.create',compact('action','software_field_master_id','swMstrId','newFA','clientId'));
 //        return view('module.create',compact('permission','fields','billingmaster','action'));
 
     }

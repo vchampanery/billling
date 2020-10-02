@@ -171,7 +171,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr> 
                 <td style="padding:0px;">2020-08-09</td>
                 <td style="padding:0px;">2</td>
                 <td style="padding:0px;">3</td>
