@@ -12,6 +12,7 @@ use App\Model\ClientMaster;
 use App\Model\SoftwareFieldMaster;
 use App\Model\ReportMaster;
 use App\Http\Traits\GeneralTrait;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class ClientDashboardController extends Controller
 {
@@ -246,7 +247,7 @@ class ClientDashboardController extends Controller
         }
         $fieldcout = count($newFA['fields']);
         
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 //         foreach(range('A','DD') as $columnID) {
 //        $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
