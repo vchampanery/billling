@@ -222,25 +222,18 @@ function example(count) {
           this["actualLng" + count] = 'something ' + count;
       }
       var vars = {};
-       $('#search_date').datepicker({ 
-        autoclose: true,   
-        format: "mm-yyyy",
-        viewMode: "months", 
-        minViewMode: "months",
-//        startDate: new Date(year, month, '01'), //set it here
-    });
     $('.data-table').DataTable({
         "bFilter": false,
         "bLengthChange": false,
 //        "aLengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]],
         "iDisplayLength": 30,
-        dom: 'lBfrtip',
-            buttons: [
-                'excel'
-//                 {
-//            extend: 'colvis',
-//            columns: ':not(:first-child)'
-        ],
+//        dom: 'lBfrtip',
+//            buttons: [
+//                'excel'
+////                 {
+////            extend: 'colvis',
+////            columns: ':not(:first-child)'
+//        ],
 //            "footerCallback": function ( row, data, start, end, display ) {
 //            var api = this.api(), data;
 //            // converting to interger to find total
@@ -272,7 +265,13 @@ function example(count) {
 //        "ajax": "server.php"
 //            ],
     });
-   
+    $('#search_date').datepicker({ 
+        autoclose: true,   
+        format: "mm-yyyy",
+        viewMode: "months", 
+        minViewMode: "months",
+//        startDate: new Date(year, month, '01'), //set it here
+    });
       
    </script>
 @endsection
