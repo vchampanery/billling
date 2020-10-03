@@ -2,7 +2,7 @@
  
 
 @section('content')
-    <div class="row" style="
+<!--    <div class="row" style="
     margin: 0px;
     max-width: 100%;
     /*overflow: scroll;*/
@@ -14,7 +14,7 @@
             </div>
             <div class="pull-right">
 
-                <!--<a class="btn btn-success" href="{{ route('module.create') }}"> Create New module</a>-->
+                <a class="btn btn-success" href="{{ route('module.create') }}"> Create New module</a>
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
@@ -42,9 +42,30 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
+            <div style="width: 50%;margin: auto;width: 35%;padding: 10px;">
+			
+				<h2 class="form-signin-heading" style="text-align: center;">User Dashboard Management</h2>
 
+				<?php   
+					if(isset($error))  
+					{  
+					  echo $error;  
+					}  
+				?> 
+				<div class="row" style="width: 50%;margin: auto;width: 35%;padding: 10px;">
+				      <label for="lname" class='ce'>Client Name</label>
+				</div>
+                @foreach($list as $keyl => $vall)
+				<div class="row" style="width: 50%;margin: auto;width: 35%;padding: 10px;">
+				    
+                        <a href="{{ route('clientdashboard.show',['id'=>$vall->client_master_id]) }}">{{$vall->client_master_name}}</a>
+
+				</div>
+                @endforeach
+
+		</div>
    
 @endsection
 

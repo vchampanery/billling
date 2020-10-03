@@ -1,7 +1,86 @@
 @extends('admin_template')
+<style type="text/css">
+		* {
+		  box-sizing: border-box;
+		}
 
+		input[type=text],input[type=email],input[type=tel],input[type=textarea], select, textarea {
+		  width: 100%;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  resize: vertical;
+		}
+
+		label {
+		  padding: 12px 12px 12px 0;
+		  display: inline-block;
+		}
+
+		/*input[type=submit] {
+		background-color: #0b84da;
+		color: #fff;
+		  padding: 12px 20px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		}*/
+
+		/*input[type=submit]:hover {
+		  background-color: #45a049;
+		}*/
+
+		.container {
+		  border-radius: 5px;
+		  background-color: #f2f2f2;
+		  padding: 20px;
+		}
+
+		.col-25 {
+		  float: left;
+		  width: 25%;
+		  margin-top: 6px;
+		}
+
+		.col-75 {
+		  float: left;
+		  width: 75%;
+		  margin-top: 6px;
+		}
+
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+
+		@media screen and (max-width: 600px) {
+		  .col-25, .col-75, input[type=submit] {
+		    width: 50%;
+		    margin-top: 0;
+		  }
+		}
+		/*.center {
+		  margin: auto;
+		  width: 50%;
+		  padding: 10px;
+		}*/
+		table, td, th {  
+		  border: 1px solid #ddd;
+		  text-align: left;
+		}
+
+		table {
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		th, td {
+		  padding: 15px;
+		}
+	</style>
 @section('content')
-    <div class="row" style="margin: 0px;">
+<!--    <div class="row" style="margin: 0px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 @if( $action == 'Edit' )
@@ -59,6 +138,66 @@
         </div>
             {!! Form::close() !!}
         </div>
+    </div>-->
+
+
+    <div style="margin: auto;width: 35%;padding: 10px;">
+                @if( $action == 'Edit' )
+                    <h2 class="form-signin-heading" style="text-align: center;">Edit Form</h2>
+                @else
+                    <h2></h2>
+                    <h2 class="form-signin-heading" style="text-align: center;">Re assign -user edit</h2>
+                @endif
+        
+
+				<?php   
+					if(isset($error))  
+					{  
+					  echo $error;  
+					}  
+				?> 
+                {!! Form::open(array('route' => 'userassign.reassignstore','method'=>'POST')) !!}
+                <input type='hidden' name='action' id='action' value='add'>
+				<div class="row">
+				    <div class="col-25">
+				      <label for="lname">Select User:</label>
+				    </div>
+				    <div class="col-75">
+                        <!--<input type="text" name="fname" id="form_fname" class="form-control" placeholder="First Name" value="" required />-->
+                        <select name="user_master_id[]" id="user_master_id[]" style='height: 60%;' multiple searchable="Search here.." onchange="loadclient(this)">
+                            <option value="">Select</option>
+                            @foreach($userList as $userKey => $userValue)
+                            <option value="{{$userValue['id']}}">{{$userValue['name']}}</option>
+                            @endforeach
+                        </select>
+				      <input type="hidden" name="id" value="<?php ?>">
+				    </div>
+				</div>
+				<div class="row">
+				    <div class="col-25">
+				      <label for="lname">Select Client:</label>
+				    </div>
+				    <div class="col-75">
+				      <select name="client_master_id[]" id="client_master_id" class="dropdown-primary md-form" multiple searchable="Search here..">   
+                            </select>
+				    </div>
+				</div>
+				<div class="row">
+				    <div class="col-25">
+				      <label for="lname">Choose date:</label>
+				    </div>
+				    <div class="col-75">
+				      <input type="text" class='form-control ' name="date" id="date" autocomplete="off" style='width: 222px;'>
+				    </div>
+				</div>
+				
+				<div class="row" style="text-align: center;  float: right;">
+					<div>
+				    	<input class="btn btn-primary" type="submit" name="submit" value="Submit" id="submit"/>
+				    	<button class="btn btn-info" style="color: #fff"><a href="{{ route('userdashboard.show') }}" style="color: #fff;">Back</a></button>
+				    </div>
+			  	</div>
+                {!! Form::close() !!}
     </div>
 @endsection
 
@@ -70,6 +209,10 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+<!--<script src="{{ asset('js/bootstrap.min.js') }}" ></script>-->
+<link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">
+<script src="{{ asset('js/bootstrap-multiselect.js') }}" ></script>
 
 <script type="text/javascript">  
 //  $('select').selectpicker();
@@ -84,6 +227,7 @@ var month=date.getMonth(); //get month
 //        minViewMode: "months",
     });
     $('select').selectpicker();
+//    $('select').multiselect();
   function loadclient(tt){
     var s1 = $(tt).val();
     var url = '{{ route('userassign.getclient') }}';

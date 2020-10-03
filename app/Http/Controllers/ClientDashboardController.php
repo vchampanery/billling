@@ -253,12 +253,28 @@ class ClientDashboardController extends Controller
 //        $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
 //        ->setAutoSize(true);
 //        }
+        
+//        $spreadsheet->getActiveSheet()->getCell('A1')->setColor('red');
         $sheet->setCellValue('A1', 'Date');
         $sheet->setCellValue('B1', 'Day');
         $sheet->setCellValue('C1', '');
         $sheet->setCellValue('A2', 'Date');
         $sheet->setCellValue('B2', 'Day');
         $sheet->setCellValue('C2', '');
+//        $sheet->getStyle('A1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+//        $sheet->getStyle('B1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+        $styleArray = array(
+    'borders' => array(
+        'outline' => array(
+            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+            'color' => array('argb' => '0a0a0a'),
+        ),
+    ),
+);
+//        $sheet ->getStyle('A1')->applyFromArray($styleArray);
+//        $sheet ->getStyle('A2')->applyFromArray($styleArray);
+//        $sheet ->getStyle('B1')->applyFromArray($styleArray);
+//        $sheet ->getStyle('B2')->applyFromArray($styleArray);
         $alphbt = 'D';
         $totalColSpan = 0;
         $black_alph = [];
@@ -266,21 +282,31 @@ class ClientDashboardController extends Controller
         foreach($newFA['module'] as $modk => $modv){
 
             $sheet->setCellValue($alphbt.'1', $modk);
+//            $sheet->getStyle($alphbt.'1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+//            $sheet->getStyle($alphbt.'1')->applyFromArray($styleArray);
             $mergeNum = (int)$modv['colspan'] - 1;
             $e= (int)$modv['colspan'];
             $mergeNum = $e -1;
             $oldAplh = $alphbt;
             if($mergeNum>0){
                 $i=0;
-                 $sheet->setCellValue($oldAplh.'2',$newFA['fields'][$totalColSpan++]);
-                while($i<$mergeNum){
+                $sheet->setCellValue($oldAplh.'2',$newFA['fields'][$totalColSpan++]);
+//                $sheet->getStyle($oldAplh.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+//                $sheet->getStyle($oldAplh.'2')->applyFromArray($styleArray);
+                 while($i<$mergeNum){
                     $alphbt++;
                     $sheet->setCellValue($alphbt.'2',$newFA['fields'][$totalColSpan++]);
+//                    $sheet->getStyle($alphbt.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+//                    $sheet->getStyle($alphbt.'2')->applyFromArray($styleArray);
+//                    $sheet->getStyle($alphbt.'2')->setAutoSize(true);
                     ++$i;
                 }
                 $sheet->mergeCells($oldAplh.'1:'.$alphbt.'1');
             }else{
                 $sheet->setCellValue($alphbt.'2',$newFA['fields'][$totalColSpan++]);
+//                $sheet->getStyle($alphbt.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+//                $sheet->getStyle($alphbt.'2')->applyFromArray($styleArray);
+//                $sheet->getStyle($alphbt.'2')->setAutoSize(true);
             }
             ++$alphbt;
             $black_alph[]= $alphbt;

@@ -24,6 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet" href="{{ asset('css/css-test/vue-css.css') }}">
   <link rel="stylesheet" href="{{ asset('css/css-test/foundation.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">
   @yield('css')
 </head>
 <!--<body class="hold-transition sidebar-mini">-->
@@ -78,6 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../bower_components/admin-lte/dist/js/adminlte.min.js"></script>
+<script src="{{ asset('js/bootstrap-multiselect.js') }}" ></script>
 <script src="{{ asset('js/vue.js') }}" ></script>
 <script src="{{ asset('js/js-css.js') }}" ></script>
 @yield('js')

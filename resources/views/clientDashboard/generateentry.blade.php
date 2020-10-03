@@ -1,11 +1,90 @@
 @extends('admin_template')
- 
+ <style type="text/css">
+		* {
+		  box-sizing: border-box;
+		}
+
+		input[type=text],input[type=email],input[type=tel],input[type=textarea], select, textarea {
+		  width: 100%;
+		  padding: 12px;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  resize: vertical;
+		}
+
+		label {
+		  padding: 12px 12px 12px 0;
+		  display: inline-block;
+		}
+
+		/*input[type=submit] {
+		background-color: #0b84da;
+		color: #fff;
+		  padding: 12px 20px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		}*/
+
+		/*input[type=submit]:hover {
+		  background-color: #45a049;
+		}*/
+
+		.container {
+		  border-radius: 5px;
+		  background-color: #f2f2f2;
+		  padding: 20px;
+		}
+
+		.col-25 {
+		  float: left;
+		  width: 25%;
+		  margin-top: 6px;
+		}
+
+		.col-75 {
+		  float: left;
+		  width: 75%;
+		  margin-top: 6px;
+		}
+
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+
+		@media screen and (max-width: 600px) {
+		  .col-25, .col-75, input[type=submit] {
+		    width: 50%;
+		    margin-top: 0;
+		  }
+		}
+		/*.center {
+		  margin: auto;
+		  width: 50%;
+		  padding: 10px;
+		}*/
+		table, td, th {  
+		  border: 1px solid #ddd;
+		  text-align: left;
+		}
+
+		table {
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		th, td {
+		  padding: 15px;
+		}
+	</style>
 
 @section('content')
     <div class="row" style="margin: 0px;max-width: 100%;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Client Generate entry </h2>
+                <!--<h2>Client Generate entry </h2>-->
             </div>
             <div class="pull-right">
                 <!--<a class="btn btn-success" href="{{ route('module.create') }}"> Create New module</a>-->
@@ -25,20 +104,20 @@
                     <div class="row" style="padding-top: 10px;">
 
                         <div class="col-xs-2 col-sm-2 col-md-2 center">
-                            <select name="client_master_ids[]" class="form-control dropdown-primary md-form" searchable="Select client" multiple>
+<!--                            <select name="client_master_ids[]" class="form-control dropdown-primary md-form" searchable="Select client" multiple>
                                 <option value="">Select</option>
                                 @foreach($clientList as $clientKey => $clientValue)
                                 <option value="{{$clientValue['client_master_id']}}">{{$clientValue['client_master_name']}}</option>
                                 @endforeach
-                            </select>
+                            </select>-->
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2 center">
-                            <input type="text" name="date" id="date" placeholder="select date" autocomplete="off">
+<!--                            <input type="text" name="date" id="date" placeholder="select date" autocomplete="off">-->
 
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2">
                             <!--<a class="btn btn-primary" href="{{ route('clientdashboard.show') }}"> Back</a>-->
-                            <button type="submit" class="btn btn-danger">Submit</button>
+                            <!--<button type="submit" class="btn btn-danger">Submit</button>-->
                         </div>
 
                         <div class="col-xs-1 col-sm-1 col-md-1">
@@ -54,6 +133,46 @@
             </div>
         </div>
     </div>
+<div style="width: 50%;margin: auto;width: 35%;padding: 10px;">
+			 {!! Form::open(array('route' => 'clientdashboard.generateentry','method'=>'POST')) !!}
+				<h2 class="form-signin-heading" style="text-align: center;">Client Generate entry</h2>
+
+				<?php   
+					if(isset($error))  
+					{  
+					  echo $error;  
+					}  
+				?> 
+				<div class="row">
+				    <div class="col-25">
+				      <label for="lname">Select Client:</label>
+				    </div>
+				    <div class="col-75">
+				       <select name="client_master_ids[]" class="md-form" searchable="Select client" multiple>
+                                <option value="">Select</option>
+                                @foreach($clientList as $clientKey => $clientValue)
+                                <option value="{{$clientValue['client_master_id']}}">{{$clientValue['client_master_name']}}</option>
+                                @endforeach
+                            </select>
+				    </div>
+				</div>
+				<div class="row">
+				    <div class="col-25">
+				      <label for="lname">Date:</label>
+				    </div>
+				    <div class="col-75">
+				      <input type="text" name="date" id="date" placeholder="select date" autocomplete="off" style='width: 222px;'>
+				    </div>
+				</div>
+				<div class="row" style="text-align: center;  float: right;">
+					<div>
+				    	<input class="btn btn-primary" type="submit" name="submit" value="Submit" id="submit" />
+				    	<button class="btn btn-info" style="color: #fff"><a href="index.php" style="color: #fff;">Back</a></button>
+				    </div>
+			  	</div>
+
+			{!! Form::close() !!}
+		</div>
 
 
    
