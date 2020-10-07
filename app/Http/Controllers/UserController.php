@@ -141,8 +141,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('email', '<>','vt@gmail.com')->find($id);
-//        $roles = Role::where('name','<>','super admin')->pluck('name','name')->all();
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::where('name','<>','super admin')->pluck('name','name')->all();
+//        $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
         return view('users.edit',compact('user','roles','userRole'));
     }

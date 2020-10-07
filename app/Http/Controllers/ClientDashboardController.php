@@ -264,13 +264,13 @@ class ClientDashboardController extends Controller
 //        $sheet->getStyle('A1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
 //        $sheet->getStyle('B1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
         $styleArray = array(
-    'borders' => array(
-        'outline' => array(
-            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-            'color' => array('argb' => '0a0a0a'),
-        ),
-    ),
-);
+            'borders' => array(
+                'outline' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => array('argb' => '0a0a0a'),
+                ),
+            ),
+        );
 //        $sheet ->getStyle('A1')->applyFromArray($styleArray);
 //        $sheet ->getStyle('A2')->applyFromArray($styleArray);
 //        $sheet ->getStyle('B1')->applyFromArray($styleArray);

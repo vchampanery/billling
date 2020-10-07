@@ -3,6 +3,8 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -15,16 +17,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!--<link rel="stylesheet" href="../bower_components/admin-lte/plugins/fontawesome-free/css/all.min.css">-->
   <!--<link rel="stylesheet" href="../bower_components/admin-lte/dist/css/adminlte.min.css">-->
 
-  <link rel="stylesheet" href="{{ asset('admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin-lte/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/admin-lte/dist/css/adminlte.min.css') }}">
   <!-- Theme style -->
   
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ asset('css/css-test/vue-css.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/css-test/foundation.min.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/css/css-test/vue-css.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/css/css-test/foundation.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('public/css/bootstrap-multiselect.css') }}">
   @yield('css')
 </head>
 <!--<body class="hold-transition sidebar-mini">-->
@@ -32,7 +34,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
   <!-- Navbar -->
-  
+    @if (!Auth::check())
+        @php
+            header("Location: " . URL::to('/login'), true, 302);
+            exit();
+        @endphp
+    @endif
   @include('layouts.header')
   <!-- /.navbar -->
  @include('layouts.sidebar') 
@@ -77,11 +84,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../bower_components/admin-lte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
+<!-- AdminLTE App -->   
 <script src="../bower_components/admin-lte/dist/js/adminlte.min.js"></script>
-<script src="{{ asset('js/bootstrap-multiselect.js') }}" ></script>
-<script src="{{ asset('js/vue.js') }}" ></script>
-<script src="{{ asset('js/js-css.js') }}" ></script>
+<script src="{{ asset('public/js/bootstrap-multiselect.js') }}" ></script>
+<script src="{{ asset('public/js/vue.js') }}" ></script>
+<script src="{{ asset('public/js/js-css.js') }}" ></script>
 @yield('js')
 </body>
 </html>
