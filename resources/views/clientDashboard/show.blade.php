@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="row" style="margin: 0px;max-width: 100%;overflow: scroll;">
+    <div class="row" style="margin: 0px;max-width: 100%;">
         <div class="col-lg-12 margin-tb">
             <!--<h3>Client Dashboard Management</h3>-->
             <div class="col-xs-2 col-sm-2 col-md-2 center">
@@ -89,11 +89,15 @@
                     <input type="hidden" name="id" value="{{$client}}">
                     <input type="text" name="search_date" id="search_date" class="form-data search_date" placeholder="Select month" autocomplete="off">
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <span style="float: center;margin: 400px;">{{$clientName}}</span>
                 {!! Form::close() !!}   
+                
+                
                 {!! Form::open(array('route' => 'clientdashboard.downloadexcel','method'=>'POST','style'=>'margin-top: -38px;')) !!}
                     <a style="float: right;" href="{{ route('userdashboard.show') }}" class="btn btn-primary">Back</a>
                      <input type="hidden" name="id" value="{{$client}}">
                     <input type="hidden" name="range" value="{{$range}}">
+                    <input type="hidden" name="clientname" value="{{$clientName}}">
                     <input type='submit' style="float: right;margin-right: 10px;" class="btn btn-primary"value='Download'>
                 {!! Form::close() !!}
                 
@@ -137,10 +141,18 @@
                         {{$keyM}}
                         @endif
                         </td>
+                        <td style="padding:0px;text-align: center;border: 1px solid black;overflow: hidden;min-width: 85px;">
+                        
+                        {{date('l', strtotime(str_replace('-', '/', $keyM)))}}
+                        </td>
                     @foreach($valM as $keyMM => $valMM)
+                        @if(in_array($keyMM,[0,34,36,38,40]))
+                        <td style="padding:0px;text-align: center;border: 1px solid black;">{{$valMM}}</td>
+                        @else
                         <td style="padding:0px;text-align: center;border: 1px solid black;">{{number_format($valMM,2)}}</td>
+                        @endif
                     @endforeach
-                     <td style="padding:0px;text-align: center;">Action</td>
+                     <!--<td style="padding:0px;text-align: center;">Action</td>-->
                 </tr>
                 @endforeach
                 @else
@@ -226,7 +238,7 @@ function example(count) {
         "bFilter": false,
         "bLengthChange": false,
 //        "aLengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]],
-        "iDisplayLength": 30,
+        "iDisplayLength": 31,
 //        dom: 'lBfrtip',
 //            buttons: [
 //                'excel'

@@ -31,7 +31,7 @@
 @endif
 
 
-{!! Form::open(array('route' => 'clientdashboard.store','method'=>'POST')) !!}
+{!! Form::open(array('route' => 'clientdashboard.store','method'=>'POST','autocomplete'=>'off')) !!}
 
 @php 
 
@@ -93,7 +93,7 @@
                         <tbody>
                             <tr><td style="text-align:center;background-color: grey;">Visits/ Units</td></tr>
                             <tr><td style="text-align:center;background-color: coral;">#Units/Visits Billed</td></tr>
-                            <tr><td><input type="text" name="software_field_master_id[1]"  value="{{isset($software_field_master_id[1])?$software_field_master_id[1]:0}}"></td></tr>
+                            <tr><td><input  type="number"  step="0.01"  name="software_field_master_id[1]"  value="{{isset($software_field_master_id[1])?$software_field_master_id[1]:0}}"></td></tr>
                         </tbody>
                     </table>
                   
@@ -103,7 +103,7 @@
                         <tbody>
                             <tr><td style="text-align:center;background-color: grey;">Billed Charges</td></tr>
                             <tr><td style="text-align:center;background-color: coral;">#Charges Billed</td></tr>
-                            <tr><td><input type="text" name="software_field_master_id[2]"  value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td></tr>
+                            <tr><td><input  type="number"  step="0.01"  name="software_field_master_id[2]"  value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td></tr>
                         </tbody>
                     </table>
                   
@@ -120,8 +120,8 @@
                                 <td style="text-align:center;background-color: coral;">Rejection Count</td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                <td><input type="text" name="software_field_master_id[4]" value="{{isset($software_field_master_id[4])?$software_field_master_id[4]:0}}"></td>
+                                <td><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                <td><input  type="number"  step="0.01"  name="software_field_master_id[4]" value="{{isset($software_field_master_id[4])?$software_field_master_id[4]:0}}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -150,12 +150,12 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 130px;">Amount</td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[5]" value="{{isset($software_field_master_id[5])?$software_field_master_id[5]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[7]" value="{{isset($software_field_master_id[7])?$software_field_master_id[7]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[9]" value="{{isset($software_field_master_id[9])?$software_field_master_id[9]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[11]" value="{{isset($software_field_master_id[11])?$software_field_master_id[11]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[13]" value="{{isset($software_field_master_id[13])?$software_field_master_id[13]:0}}"></td>
-                                    <td style="max-width: 130px;"><input style="max-width: 130px;"  type="text" name="software_field_master_id[15]" value="{{isset($software_field_master_id[15])?$software_field_master_id[15]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[5]" value="{{isset($software_field_master_id[5])?$software_field_master_id[5]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[7]" value="{{isset($software_field_master_id[7])?$software_field_master_id[7]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[9]" value="{{isset($software_field_master_id[9])?$software_field_master_id[9]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[11]" value="{{isset($software_field_master_id[11])?$software_field_master_id[11]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[13]" value="{{isset($software_field_master_id[13])?$software_field_master_id[13]:0}}"></td>
+                                    <td style="max-width: 130px;"><input style="max-width: 130px;"   type="number"  step="0.01"  name="software_field_master_id[15]" value="{{isset($software_field_master_id[15])?$software_field_master_id[15]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -185,12 +185,12 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 130px;">Amount</td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[19]" value="{{isset($software_field_master_id[19])?$software_field_master_id[19]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[21]" value="{{isset($software_field_master_id[21])?$software_field_master_id[21]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[23]" value="{{isset($software_field_master_id[23])?$software_field_master_id[23]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[25]" value="{{isset($software_field_master_id[25])?$software_field_master_id[25]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[27]" value="{{isset($software_field_master_id[27])?$software_field_master_id[27]:0}}"></td>
-                                    <td style="max-width: 130px;"><input style="max-width: 130px;"  type="text" name="software_field_master_id[29]" value="{{isset($software_field_master_id[29])?$software_field_master_id[29]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[19]" value="{{isset($software_field_master_id[19])?$software_field_master_id[19]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[21]" value="{{isset($software_field_master_id[21])?$software_field_master_id[21]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[23]" value="{{isset($software_field_master_id[23])?$software_field_master_id[23]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[25]" value="{{isset($software_field_master_id[25])?$software_field_master_id[25]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[27]" value="{{isset($software_field_master_id[27])?$software_field_master_id[27]:0}}"></td>
+                                    <td style="max-width: 130px;"><input style="max-width: 130px;"   type="number"  step="0.01"  name="software_field_master_id[29]" value="{{isset($software_field_master_id[29])?$software_field_master_id[29]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -218,11 +218,11 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 130px;">Amount</td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[2]" value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input style="max-width: 130px;"  type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[2]" value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input style="max-width: 130px;"   type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -242,9 +242,9 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align:center;background-color: coral;">$Insurance Collection</td>
-                                    <td style="text-align:center;"><input  type="text" name="software_field_master_id[38]" value="{{isset($software_field_master_id[38])?$software_field_master_id[38]:0}}"></td>
+                                    <td style="text-align:center;"><input   type="number"  step="0.01"  name="software_field_master_id[38]" value="{{isset($software_field_master_id[38])?$software_field_master_id[38]:0}}"></td>
                                     <td style="text-align:center;background-color: coral;">$Patient Collection</td>
-                                    <td style="text-align:center;"><input type="text" name="software_field_master_id[39]" value="{{isset($software_field_master_id[39])?$software_field_master_id[39]:0}}"></td>
+                                    <td style="text-align:center;"><input  type="number"  step="0.01"  name="software_field_master_id[39]" value="{{isset($software_field_master_id[39])?$software_field_master_id[39]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -269,14 +269,14 @@
                                     <td style="text-align:center;background-color: coral;"colspan="2" >Year to Date</td>
                                 </tr>
                                 <tr>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[123]" value="{{isset($software_field_master_id[123])?$software_field_master_id[123]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[124]" value="{{isset($software_field_master_id[124])?$software_field_master_id[124]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[129]" value="{{isset($software_field_master_id[129])?$software_field_master_id[129]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[130]" value="{{isset($software_field_master_id[130])?$software_field_master_id[130]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[135]" value="{{isset($software_field_master_id[135])?$software_field_master_id[135]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[136]" value="{{isset($software_field_master_id[136])?$software_field_master_id[136]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[141]" value="{{isset($software_field_master_id[141])?$software_field_master_id[141]:0}}"></td>
-                                    <td style="max-width: 115px;"><input style="max-width: 115px;"  type="text" name="software_field_master_id[142]" value="{{isset($software_field_master_id[142])?$software_field_master_id[142]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[123]" value="{{isset($software_field_master_id[123])?$software_field_master_id[123]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[124]" value="{{isset($software_field_master_id[124])?$software_field_master_id[124]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[129]" value="{{isset($software_field_master_id[129])?$software_field_master_id[129]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[130]" value="{{isset($software_field_master_id[130])?$software_field_master_id[130]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[135]" value="{{isset($software_field_master_id[135])?$software_field_master_id[135]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[136]" value="{{isset($software_field_master_id[136])?$software_field_master_id[136]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[141]" value="{{isset($software_field_master_id[141])?$software_field_master_id[141]:0}}"></td>
+                                    <td style="max-width: 115px;"><input style="max-width: 115px;"   type="number"  step="0.01"  name="software_field_master_id[142]" value="{{isset($software_field_master_id[142])?$software_field_master_id[142]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -340,7 +340,7 @@
                         <tbody>
                             <tr><td style="text-align:center;background-color: grey;">Visits/ Units</td></tr>
                             <tr><td style="text-align:center;background-color: coral;">#Units/Visits Billed</td></tr>
-                            <tr><td><input  style="width: 160px;"  type="text" name="software_field_master_id[41]" value="{{isset($software_field_master_id[41])?$software_field_master_id[41]:0}}"></td></tr>
+                            <tr><td><input  style="width: 160px;"   type="number"  step="0.01"  name="software_field_master_id[41]" value="{{isset($software_field_master_id[41])?$software_field_master_id[41]:0}}"></td></tr>
                         </tbody>
                     </table>
                   
@@ -350,7 +350,7 @@
                         <tbody>
                             <tr><td style="text-align:center;background-color: grey;">Billed Charges</td></tr>
                             <tr><td style="text-align:center;background-color: coral;">#Charges Billed</td></tr>
-                            <tr><td><input  style="width: 160px;"  type="text" name="software_field_master_id[42]"  value="{{isset($software_field_master_id[42])?$software_field_master_id[42]:0}}"></td></tr>
+                            <tr><td><input  style="width: 160px;"   type="number"  step="0.01"  name="software_field_master_id[42]"  value="{{isset($software_field_master_id[42])?$software_field_master_id[42]:0}}"></td></tr>
                         </tbody>
                     </table>
                   
@@ -363,14 +363,14 @@
                                     colspan="3" rowspan="1"> Denied Charges</td>
                             </tr>
                             <tr>
-                                <td style="text-align:center;background-color: coral;">Denied Count</td>
-                                <td style="text-align:center;background-color: coral;">Rejection Count</td>
-                                <td style="text-align:center;background-color: coral;">Era payer Denied</td>
+                                <td style="text-align:center;background-color: coral;">Clearing House Rej</td>
+                                <td style="text-align:center;background-color: coral;">Insurance Rejection</td>
+                                <td style="text-align:center;background-color: coral;">ERA Payer Denied</td>
                             </tr>
                             <tr>
-                                <td><input  style="width: 160px;"  type="text" name="software_field_master_id[43]" value="{{isset($software_field_master_id[43])?$software_field_master_id[43]:0}}"></td>
-                                <td><input  style="width: 160px;"  type="text" name="software_field_master_id[44]" value="{{isset($software_field_master_id[44])?$software_field_master_id[44]:0}}"></td>
-                                <td><input   style="width: 160px;" type="text" name="software_field_master_id[45]" value="{{isset($software_field_master_id[45])?$software_field_master_id[45]:0}}"></td>
+                                <td><input  style="width: 160px;"   type="number"  step="0.01"  name="software_field_master_id[43]" value="{{isset($software_field_master_id[43])?$software_field_master_id[43]:0}}"></td>
+                                <td><input  style="width: 160px;"   type="number"  step="0.01"  name="software_field_master_id[44]" value="{{isset($software_field_master_id[44])?$software_field_master_id[44]:0}}"></td>
+                                <td><input   style="width: 160px;"  type="number"  step="0.01"  name="software_field_master_id[45]" value="{{isset($software_field_master_id[45])?$software_field_master_id[45]:0}}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -400,13 +400,13 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 122px;">Amount</td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[46]" value="{{isset($software_field_master_id[46])?$software_field_master_id[46]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[48]" value="{{isset($software_field_master_id[48])?$software_field_master_id[48]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[50]" value="{{isset($software_field_master_id[50])?$software_field_master_id[50]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[52]" value="{{isset($software_field_master_id[52])?$software_field_master_id[52]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[54]" value="{{isset($software_field_master_id[54])?$software_field_master_id[54]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[56]" value="{{isset($software_field_master_id[56])?$software_field_master_id[56]:0}}"></td>
-         <td style="max-width: 130px;"><input style="max-width: 125px;"  type="text" name="software_field_master_id[58]" value="{{isset($software_field_master_id[58])?$software_field_master_id[58]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  pattern="[0-9]" name="software_field_master_id[46]" value="{{isset($software_field_master_id[46])?$software_field_master_id[46]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[48]" value="{{isset($software_field_master_id[48])?$software_field_master_id[48]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[50]" value="{{isset($software_field_master_id[50])?$software_field_master_id[50]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[52]" value="{{isset($software_field_master_id[52])?$software_field_master_id[52]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[54]" value="{{isset($software_field_master_id[54])?$software_field_master_id[54]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[56]" value="{{isset($software_field_master_id[56])?$software_field_master_id[56]:0}}"></td>
+         <td style="max-width: 130px;"><input style="max-width: 125px;"   type="number"  step="0.01"  name="software_field_master_id[58]" value="{{isset($software_field_master_id[58])?$software_field_master_id[58]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -436,13 +436,13 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 122px;">Amount</td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[62]" value="{{isset($software_field_master_id[62])?$software_field_master_id[62]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[64]" value="{{isset($software_field_master_id[64])?$software_field_master_id[64]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[66]" value="{{isset($software_field_master_id[66])?$software_field_master_id[66]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[68]" value="{{isset($software_field_master_id[68])?$software_field_master_id[68]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[70]" value="{{isset($software_field_master_id[70])?$software_field_master_id[70]:0}}"></td>
-                                    <td style="max-width: 122px;"><input type="text" name="software_field_master_id[72]" value="{{isset($software_field_master_id[72])?$software_field_master_id[72]:0}}"></td>
-          <td style="max-width: 130px;"><input style="max-width: 125px;" type="text" name="software_field_master_id[74]" value="{{isset($software_field_master_id[74])?$software_field_master_id[74]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[62]" value="{{isset($software_field_master_id[62])?$software_field_master_id[62]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[64]" value="{{isset($software_field_master_id[64])?$software_field_master_id[64]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[66]" value="{{isset($software_field_master_id[66])?$software_field_master_id[66]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[68]" value="{{isset($software_field_master_id[68])?$software_field_master_id[68]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[70]" value="{{isset($software_field_master_id[70])?$software_field_master_id[70]:0}}"></td>
+                                    <td style="max-width: 122px;"><input  type="number"  step="0.01"  name="software_field_master_id[72]" value="{{isset($software_field_master_id[72])?$software_field_master_id[72]:0}}"></td>
+          <td style="max-width: 130px;"><input style="max-width: 125px;"  type="number"  step="0.01"  name="software_field_master_id[74]" value="{{isset($software_field_master_id[74])?$software_field_master_id[74]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -471,13 +471,13 @@
                                 </tr>
                                 <tr>
                                   
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[2]" value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
-                                    <td style="max-width: 130px;"><input type="text" name="software_field_master_id[2]" value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td>
-                                    <td style="max-width: 130px;"><input style="max-width: 130px;"  type="text" name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[2]" value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
+                                    <td style="max-width: 130px;"><input  type="number"  step="0.01"  name="software_field_master_id[2]" value="{{isset($software_field_master_id[2])?$software_field_master_id[2]:0}}"></td>
+                                    <td style="max-width: 130px;"><input style="max-width: 130px;"   type="number"  step="0.01"  name="software_field_master_id[3]" value="{{isset($software_field_master_id[3])?$software_field_master_id[3]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -497,9 +497,9 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align:center;background-color: coral;">$Insurance Collection</td>
-                                    <td style="text-align:center;"><input style="height: 47px;width: 115px;" type="text" name="software_field_master_id[85]" value="{{isset($software_field_master_id[85])?$software_field_master_id[85]:0}}"></td>
+                                    <td style="text-align:center;"><input style="height: 47px;width: 115px;"  type="number"  step="0.01"  name="software_field_master_id[85]" value="{{isset($software_field_master_id[85])?$software_field_master_id[85]:0}}"></td>
                                     <td style="text-align:center;background-color: coral;">$Patient Collection</td>
-                                    <td style="text-align:center;"><input style="height: 47px;width: 115px;" type="text" name="software_field_master_id[86]" value="{{isset($software_field_master_id[86])?$software_field_master_id[86]:0}}"></td>
+                                    <td style="text-align:center;"><input style="height: 47px;width: 115px;"  type="number"  step="0.01"  name="software_field_master_id[86]" value="{{isset($software_field_master_id[86])?$software_field_master_id[86]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -515,7 +515,7 @@
                                 <tr style="height: 47px;">
                                     <td style="text-align:center;background-color: coral;width: 50%;">count</td>
                                     <td style="text-align:center;">
-                                        <input style="height: 47px;width: 115px;" type="text" name="software_field_master_id[88]" value="{{isset($software_field_master_id[88])?$software_field_master_id[88]:0}}">
+                                        <input style="height: 47px;width: 115px;"  type="number"  step="0.01"  name="software_field_master_id[88]" value="{{isset($software_field_master_id[88])?$software_field_master_id[88]:0}}">
                                     </td>
                                 </tr>
                             </tbody>
@@ -541,14 +541,14 @@
                                     <td style="text-align:center;background-color: coral;"colspan="2" >Year to Date</td>
                                 </tr>
                                 <tr>
-                                    <td style="min-width: 110px;"><input type="text" name="software_field_master_id[125]" value="{{isset($software_field_master_id[125])?$software_field_master_id[125]:0}}"></td>
-                                    <td style="max-width: 110px;"><input type="text" name="software_field_master_id[126]" value="{{isset($software_field_master_id[126])?$software_field_master_id[126]:0}}"></td>
-                                    <td style="max-width: 110px;"><input type="text" name="software_field_master_id[131]" value="{{isset($software_field_master_id[131])?$software_field_master_id[131]:0}}"></td>
-                                    <td style="max-width: 110px;"><input type="text" name="software_field_master_id[132]" value="{{isset($software_field_master_id[132])?$software_field_master_id[132]:0}}"></td>
-                                    <td style="max-width: 110px;"><input type="text" name="software_field_master_id[137]" value="{{isset($software_field_master_id[137])?$software_field_master_id[137]:0}}"></td>
-                                    <td style="max-width: 110px;"><input type="text" name="software_field_master_id[138]" value="{{isset($software_field_master_id[138])?$software_field_master_id[138]:0}}"></td>
-                                    <td style="max-width: 110px;"><input type="text" name="software_field_master_id[143]" value="{{isset($software_field_master_id[143])?$software_field_master_id[143]:0}}"></td>
-         <td style="max-width: 130px;"><input style="max-width: 120px;"  type="text" name="software_field_master_id[144]" value="{{isset($software_field_master_id[144])?$software_field_master_id[144]:0}}"></td>
+                                    <td style="min-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[125]" value="{{isset($software_field_master_id[125])?$software_field_master_id[125]:0}}"></td>
+                                    <td style="max-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[126]" value="{{isset($software_field_master_id[126])?$software_field_master_id[126]:0}}"></td>
+                                    <td style="max-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[131]" value="{{isset($software_field_master_id[131])?$software_field_master_id[131]:0}}"></td>
+                                    <td style="max-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[132]" value="{{isset($software_field_master_id[132])?$software_field_master_id[132]:0}}"></td>
+                                    <td style="max-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[137]" value="{{isset($software_field_master_id[137])?$software_field_master_id[137]:0}}"></td>
+                                    <td style="max-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[138]" value="{{isset($software_field_master_id[138])?$software_field_master_id[138]:0}}"></td>
+                                    <td style="max-width: 110px;"><input  type="number"  step="0.01"  name="software_field_master_id[143]" value="{{isset($software_field_master_id[143])?$software_field_master_id[143]:0}}"></td>
+         <td style="max-width: 130px;"><input style="max-width: 120px;"   type="number"  step="0.01"  name="software_field_master_id[144]" value="{{isset($software_field_master_id[144])?$software_field_master_id[144]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -611,7 +611,7 @@
                         <tbody>
                             <tr><td style="text-align:center;background-color: grey;">Visits/ Units</td></tr>
                             <tr><td style="text-align:center;background-color: coral;">#Units/Visits Billed</td></tr>
-                            <tr><td><input type="text" name="software_field_master_id[89]"  value="{{isset($software_field_master_id[89])?$software_field_master_id[89]:0}}"></td></tr>
+                            <tr><td><input  type="number"  step="0.01"  name="software_field_master_id[89]"  value="{{isset($software_field_master_id[89])?$software_field_master_id[89]:0}}"></td></tr>
                         </tbody>
                     </table>
                   
@@ -621,7 +621,7 @@
                         <tbody>
                             <tr><td style="text-align:center;background-color: grey;">Billed Charges</td></tr>
                             <tr><td style="text-align:center;background-color: coral;">#Charges Billed</td></tr>
-                            <tr><td><input type="text" name="software_field_master_id[90]"  value="{{isset($software_field_master_id[90])?$software_field_master_id[90]:0}}"></td></tr>
+                            <tr><td><input  type="number"  step="0.01"  name="software_field_master_id[90]"  value="{{isset($software_field_master_id[90])?$software_field_master_id[90]:0}}"></td></tr>
                         </tbody>
                     </table>
                   
@@ -650,11 +650,11 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 70px;">Amount</td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[91]" value="{{isset($software_field_master_id[91])?$software_field_master_id[91]:0}}"></td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[93]" value="{{isset($software_field_master_id[93])?$software_field_master_id[93]:0}}"></td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[95]" value="{{isset($software_field_master_id[95])?$software_field_master_id[95]:0}}"></td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[97]" value="{{isset($software_field_master_id[97])?$software_field_master_id[97]:0}}"></td>
-                                    <td style="max-width: 180px;"><input style="max-width: 130px;" type="text" name="software_field_master_id[99]" value="{{isset($software_field_master_id[99])?$software_field_master_id[99]:0}}"></td>
+                                    <td style="max-width: 180px;"><input type="number"  step="0.01"  name="software_field_master_id[91]" value="{{isset($software_field_master_id[91])?$software_field_master_id[91]:0}}"></td>
+                                    <td style="max-width: 180px;"><input type="number"  step="0.01" name="software_field_master_id[93]" value="{{isset($software_field_master_id[93])?$software_field_master_id[93]:0}}"></td>
+                                    <td style="max-width: 180px;"><input type="number"  step="0.01" name="software_field_master_id[95]" value="{{isset($software_field_master_id[95])?$software_field_master_id[95]:0}}"></td>
+                                    <td style="max-width: 180px;"><input type="number"  step="0.01" name="software_field_master_id[97]" value="{{isset($software_field_master_id[97])?$software_field_master_id[97]:0}}"></td>
+                                    <td style="max-width: 180px;"><input style="max-width: 130px;" type="number"  step="0.01" name="software_field_master_id[99]" value="{{isset($software_field_master_id[99])?$software_field_master_id[99]:0}}"></td>
 
                                 </tr>
                             </tbody>
@@ -683,11 +683,11 @@
                                 </tr>
                                 <tr>
                                     <td style="min-width: 70px;">Amount</td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[103]" value="{{isset($software_field_master_id[103])?$software_field_master_id[103]:0}}"></td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[105]" value="{{isset($software_field_master_id[105])?$software_field_master_id[105]:0}}"></td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[107]" value="{{isset($software_field_master_id[107])?$software_field_master_id[107]:0}}"></td>
-                                    <td style="max-width: 180px;"><input type="text" name="software_field_master_id[109]" value="{{isset($software_field_master_id[109])?$software_field_master_id[109]:0}}"></td>
-                                    <td style="max-width: 180px;"><input style="max-width: 130px;" type="text" name="software_field_master_id[111]" value="{{isset($software_field_master_id[111])?$software_field_master_id[111]:0}}"></td>
+                                    <td style="max-width: 180px;"><input  type="number"  step="0.01"  name="software_field_master_id[103]" value="{{isset($software_field_master_id[103])?$software_field_master_id[103]:0}}"></td>
+                                    <td style="max-width: 180px;"><input  type="number"  step="0.01"  name="software_field_master_id[105]" value="{{isset($software_field_master_id[105])?$software_field_master_id[105]:0}}"></td>
+                                    <td style="max-width: 180px;"><input  type="number"  step="0.01"  name="software_field_master_id[107]" value="{{isset($software_field_master_id[107])?$software_field_master_id[107]:0}}"></td>
+                                    <td style="max-width: 180px;"><input  type="number"  step="0.01"  name="software_field_master_id[109]" value="{{isset($software_field_master_id[109])?$software_field_master_id[109]:0}}"></td>
+                                    <td style="max-width: 180px;"><input style="max-width: 130px;"  type="number"  step="0.01"  name="software_field_master_id[111]" value="{{isset($software_field_master_id[111])?$software_field_master_id[111]:0}}"></td>
 
                                 </tr>
                             </tbody>
@@ -708,9 +708,9 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align:center;background-color: coral;">$Insurance Collection</td>
-                                    <td style="text-align:center;"><input style="height: 47px;" type="text" name="software_field_master_id[120]" value="{{isset($software_field_master_id[120])?$software_field_master_id[120]:0}}"></td>
+                                    <td style="text-align:center;"><input style="height: 47px;"  type="number"  step="0.01"  name="software_field_master_id[120]" value="{{isset($software_field_master_id[120])?$software_field_master_id[120]:0}}"></td>
                                     <td style="text-align:center;background-color: coral;">$Patient Collection</td>
-                                    <td style="text-align:center;"><input style="height: 47px;" type="text" name="software_field_master_id[121]" value="{{isset($software_field_master_id[121])?$software_field_master_id[121]:0}}"></td>
+                                    <td style="text-align:center;"><input style="height: 47px;"  type="number"  step="0.01"  name="software_field_master_id[121]" value="{{isset($software_field_master_id[121])?$software_field_master_id[121]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -737,14 +737,14 @@
                                     <td style="text-align:center;background-color: coral;"colspan="2" >Year to Date</td>
                                 </tr>
                                 <tr>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[127]" value="{{isset($software_field_master_id[127])?$software_field_master_id[127]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[128]" value="{{isset($software_field_master_id[128])?$software_field_master_id[128]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[133]" value="{{isset($software_field_master_id[133])?$software_field_master_id[133]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[134]" value="{{isset($software_field_master_id[134])?$software_field_master_id[134]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[139]" value="{{isset($software_field_master_id[139])?$software_field_master_id[139]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[140]" value="{{isset($software_field_master_id[140])?$software_field_master_id[140]:0}}"></td>
-                                    <td style="max-width: 115px;"><input type="text" name="software_field_master_id[145]" value="{{isset($software_field_master_id[145])?$software_field_master_id[145]:0}}"></td>
-                                    <td style="max-width: 115px;"><input style="max-width: 115px;" type="text" name="software_field_master_id[146]" value="{{isset($software_field_master_id[146])?$software_field_master_id[146]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[127]" value="{{isset($software_field_master_id[127])?$software_field_master_id[127]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[128]" value="{{isset($software_field_master_id[128])?$software_field_master_id[128]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[133]" value="{{isset($software_field_master_id[133])?$software_field_master_id[133]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[134]" value="{{isset($software_field_master_id[134])?$software_field_master_id[134]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[139]" value="{{isset($software_field_master_id[139])?$software_field_master_id[139]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[140]" value="{{isset($software_field_master_id[140])?$software_field_master_id[140]:0}}"></td>
+                                    <td style="max-width: 115px;"><input  type="number"  step="0.01"  name="software_field_master_id[145]" value="{{isset($software_field_master_id[145])?$software_field_master_id[145]:0}}"></td>
+                                    <td style="max-width: 115px;"><input style="max-width: 115px;"  type="number"  step="0.01"  name="software_field_master_id[146]" value="{{isset($software_field_master_id[146])?$software_field_master_id[146]:0}}"></td>
                                 </tr>
                             </tbody>
                         </table>

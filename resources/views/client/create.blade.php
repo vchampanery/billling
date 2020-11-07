@@ -59,7 +59,7 @@
                         @php
                             $val = isset($clientMaster['software_master_id'])?$clientMaster['software_master_id']:null;
                         @endphp
-                        <select name="software_master_id" class="form-control dropdown-primary md-form" searchable="Search here..">
+                        <select name="software_master_id" class="form-control"  searchable="Search here.." style="height: 38px !important;">
                             <option value="">Select</option>
                             @foreach($softwareList as $softwareKey => $softwareValue)
                             <option value="{{$softwareValue['software_master_id']}}" {{($val==$softwareValue['software_master_id']) ? "selected":''}}>{{$softwareValue['software_master_name']}}</option>
@@ -71,7 +71,7 @@
                     <strong> Select User</strong>                      
                     <div class="input-group">
                         
-                        <select name="user_master_id[]" id="user_master_id" class=" form-control dropdown-primary md-form" multiple searchable="Search here..">
+                        <select name="user_master_id[]" id="user_master_id" class=" form-control" multiple searchable="Search here.." >
                             <option value="">Select</option>
                             @foreach($userList as $userKey => $userValue)
                             <option value="{{$userValue['id']}}" {{in_array($userValue['id'],$userAssignMaster) ? "selected":''}}>{{$userValue['name']}}</option>
@@ -99,7 +99,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">  
 //     $('#user_master_id').selectpicker();
 //      $('#user_master_id').multiselect({
@@ -115,7 +118,16 @@
 //        enableCaseInsensitiveFiltering: true,
 //        buttonWidth: '100%'
 //    }); 
-    $('select').selectpicker();
+// $('select').multiselect({
+//    templates: { // Use the Awesome Bootstrap Checkbox structure
+//      li: '<li class="checkList"><a tabindex="0"><div class="aweCheckbox aweCheckbox-danger"><label for=""></label></div></a></li>'
+//    }
+//  });
+  $(document).ready(function() {
+        $('select').select2({
+//            height: 45px,
+        });
+    });
     $('#biiling_date').datepicker({ 
         autoclose: true,   
         format: 'yyyy-M-dd'  

@@ -37,7 +37,7 @@ trait GeneralTrait
                 //unbilled amount %
                 $data[6] =round($data[5]/$data[17]*100,2);
                 
-                $data[18] =$data[6]+$data[8]+$data[10]+$data[12]+$data[14]+$data[16];
+                $data[18] =round($data[6]+$data[8]+$data[10]+$data[12]+$data[14]+$data[16],2);
             } else {
                 $data[8] = round(0,2);
                 //30-60 %round(`
@@ -80,7 +80,7 @@ trait GeneralTrait
                 //unbilled amount %
                 $data[30] =round($data[29]/$data[31]*100,2);
                 
-                $data[32] = $data[22]+$data[24]+$data[26]+$data[28]+$data[20]+$data[30];
+                $data[32] = round($data[22]+$data[24]+$data[26]+$data[28]+$data[20]+$data[30],2);
             } else {
                 //$data[8] = round($data[7]/$data[17]*100,2);
                 $data[22] = round(0,2);
@@ -126,7 +126,7 @@ trait GeneralTrait
                 //unbilled amount %
                 $data[100] =round($data[99]/$data[101]*100,2);
                 //total %
-                $data[102] =$data[92]+$data[94]+$data[96]+$data[98]+$data[100];
+                $data[102] =round($data[92]+$data[94]+$data[96]+$data[98]+$data[100],2);
             } else {
                 $data[92] = round(0,2);
                 //30-60 %round(`
@@ -166,7 +166,7 @@ trait GeneralTrait
                 //unbilled amount %
                 $data[112] =round($data[111]/$data[113]*100,2);
                 //total
-                $data[114] =$data[104]+$data[106]+$data[108]+$data[110]+$data[112];
+                $data[114] =round($data[104]+$data[106]+$data[108]+$data[110]+$data[112],2);
                 
             } else {
                 //$data[8] = round($data[7]/$data[17]*100,2);
@@ -225,7 +225,7 @@ trait GeneralTrait
                 $data[57] =round($data[56]/$data[60]*100,2);
                 $data[59] =round($data[58]/$data[60]*100,2);
                 //total %
-                $data[61] =$data[47]+$data[49]+$data[51]+$data[53]+$data[55]+$data[57]+$data[59];
+                $data[61] =round($data[47]+$data[49]+$data[51]+$data[53]+$data[55]+$data[57]+$data[59],2);
             } else {
                 $data[47] =round(0,2);
                 //30-60 %ro
@@ -268,7 +268,7 @@ trait GeneralTrait
                 $data[71] =round($data[70]/$data[76]*100,2);
                 $data[73] =round($data[72]/$data[76]*100,2);
                 $data[75] =round($data[74]/$data[76]*100,2);
-                $data[77] =$data[63]+$data[65]+$data[67]+$data[69]+$data[71]+$data[73]+$data[75];
+                $data[77] =round($data[63]+$data[65]+$data[67]+$data[69]+$data[71]+$data[73]+$data[75],2);
                 
             } else {
                 

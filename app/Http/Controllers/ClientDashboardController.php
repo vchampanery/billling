@@ -79,6 +79,7 @@ class ClientDashboardController extends Controller
         $client = isset($request->id)?$request->id:1;
         $list = ClientMaster::where('client_master_id',$client)
             ->first();
+        $clientName = $list->client_master_name;
         $swMstrId = $list['software_master_id'];
         $fileMst = SoftwareFieldMaster::where('software_master_id',$swMstrId)
                 ->join('module_master', 'module_master.module_master_id', '=', 'software_field_master.module_master_id')
@@ -108,6 +109,7 @@ class ClientDashboardController extends Controller
         $newFA['value'] =[];
         $newFA['diff'] =[];
         $newFA['module']['Date'] = ['name'=>'Date','rowspan'=>'2','colspan'=>'1'];
+        $newFA['module']['Day'] = ['name'=>'Date','rowspan'=>'2','colspan'=>'1'];
         foreach($fileMst as $key => $value){
             if(isset($newFA['module'][$value['module_master_name']])){
                 $colsCnt = $newFA['module'][$value['module_master_name']]['colspan'];
@@ -119,8 +121,8 @@ class ClientDashboardController extends Controller
                 $newFA['fields'][] =$value['field_master_name']; 
             } 
         }
-        
-        $newFA['module']['Action'] = ['name'=>'Action','rowspan'=>'2','colspan'=>'1'];
+//        dd($newFA);
+//        $newFA['module']['Action'] = ['name'=>'Action','rowspan'=>'2','colspan'=>'1'];
         $current = strtotime(date("Y-m-d"));
         //get reassign data
         $user = auth()->user()->id;
@@ -145,7 +147,8 @@ class ClientDashboardController extends Controller
         //client list 
         $clientList = ClientMaster::all()->toArray();
         $fieldsArray = $newFA;
-        return view('clientDashboard.show',compact('list','fieldsArray','clientList','client','range'));
+       
+        return view('clientDashboard.show',compact('list','fieldsArray','clientList','client','range','clientName'));
     }
     
     
@@ -225,11 +228,15 @@ class ClientDashboardController extends Controller
             $edate = date('m-31-Y');
         }
         $list = ReportMaster::where('client_master_id',$client)
-           ->select(['report_master.date','report_master.value','report_master.report_master_id','report_master.software_field_master_id'])
+             ->join('software_field_master', 'software_field_master.software_field_master_id', '=', 'report_master.software_field_master_id')
+             ->join('field_master', 'field_master.field_master_id', '=', 'software_field_master.field_master_id')
+           ->select(['report_master.date','report_master.value',
+                    'report_master.report_master_id','report_master.software_field_master_id',
+               'field_master.type'])
 //           ->where('report_master.date','>','09-02-2020')
            ->whereBetween('report_master.date',[$sdate,$edate])
             ->get()->toArray();
-        
+       
         $newFA =[];
         $newFA['module'] =[];
         $newFA['fields'] =[];
@@ -249,11 +256,14 @@ class ClientDashboardController extends Controller
         
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-//         foreach(range('A','DD') as $columnID) {
-//        $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
-//        ->setAutoSize(true);
-//        }
         
+        
+//         foreach(range('A','AA') as $columnID) {
+//             dump($columnID);
+////        $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+////        ->setAutoSize(true);
+//        }
+//        dd();
 //        $spreadsheet->getActiveSheet()->getCell('A1')->setColor('red');
         $sheet->setCellValue('A1', 'Date');
         $sheet->setCellValue('B1', 'Day');
@@ -261,16 +271,53 @@ class ClientDashboardController extends Controller
         $sheet->setCellValue('A2', 'Date');
         $sheet->setCellValue('B2', 'Day');
         $sheet->setCellValue('C2', '');
+        $headerColor = '58668E';
+        $headerColor1 = '95B0F9';
 //        $sheet->getStyle('A1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
 //        $sheet->getStyle('B1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
+//        $styleArray = array(
+//            'borders' => array(
+//                'outline' => array(
+//                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+//                    'color' => array('argb' => '0a0a0a'),
+//                ),
+//            ),
+//        );
         $styleArray = array(
+            'font'  => array(
+                'bold'  => true,
+                'color' => array('rgb' => 'FFFFFF'),
+                'size'  => 11,
+                'name'  => 'Calibri'
+            ),
             'borders' => array(
                 'outline' => array(
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     'color' => array('argb' => '0a0a0a'),
                 ),
             ),
         );
+        $styleArray1 = array(
+            'font'  => array(
+//                'bold'  => true,
+//                'color' => array('rgb' => 'FFFFFF'),
+                'size'  => 11,
+                'name'  => 'Calibri'
+            ),
+            'borders' => array(
+                'outline' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => array('argb' => '0a0a0a'),
+                ),
+            ),
+        );
+        $sheet->getStyle('A1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
+//        $sheet->getStyle('A1')->getFont()->setColor();
+        $sheet->getStyle('A1')->applyFromArray($styleArray);
+        $sheet->getStyle('B1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
+        $sheet->getStyle('B1')->applyFromArray($styleArray);
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 //        $sheet ->getStyle('A1')->applyFromArray($styleArray);
 //        $sheet ->getStyle('A2')->applyFromArray($styleArray);
 //        $sheet ->getStyle('B1')->applyFromArray($styleArray);
@@ -280,10 +327,10 @@ class ClientDashboardController extends Controller
         $black_alph = [];
        
         foreach($newFA['module'] as $modk => $modv){
-
+             $spreadsheet->getActiveSheet()->getColumnDimension($alphbt)->setAutoSize(true);
             $sheet->setCellValue($alphbt.'1', $modk);
-//            $sheet->getStyle($alphbt.'1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
-//            $sheet->getStyle($alphbt.'1')->applyFromArray($styleArray);
+            $sheet->getStyle($alphbt.'1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
+            $sheet->getStyle($alphbt.'1')->applyFromArray($styleArray);
             $mergeNum = (int)$modv['colspan'] - 1;
             $e= (int)$modv['colspan'];
             $mergeNum = $e -1;
@@ -291,19 +338,21 @@ class ClientDashboardController extends Controller
             if($mergeNum>0){
                 $i=0;
                 $sheet->setCellValue($oldAplh.'2',$newFA['fields'][$totalColSpan++]);
-//                $sheet->getStyle($oldAplh.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
-//                $sheet->getStyle($oldAplh.'2')->applyFromArray($styleArray);
+                $sheet->getStyle($oldAplh.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
+                $sheet->getStyle($oldAplh.'2')->applyFromArray($styleArray);
                  while($i<$mergeNum){
                     $alphbt++;
                     $sheet->setCellValue($alphbt.'2',$newFA['fields'][$totalColSpan++]);
-//                    $sheet->getStyle($alphbt.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
-//                    $sheet->getStyle($alphbt.'2')->applyFromArray($styleArray);
+                    $sheet->getStyle($alphbt.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
+                    $sheet->getStyle($alphbt.'2')->applyFromArray($styleArray);
 //                    $sheet->getStyle($alphbt.'2')->setAutoSize(true);
                     ++$i;
                 }
                 $sheet->mergeCells($oldAplh.'1:'.$alphbt.'1');
             }else{
                 $sheet->setCellValue($alphbt.'2',$newFA['fields'][$totalColSpan++]);
+                $sheet->getStyle($alphbt.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
+                $sheet->getStyle($alphbt.'2')->applyFromArray($styleArray);
 //                $sheet->getStyle($alphbt.'2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f48024');
 //                $sheet->getStyle($alphbt.'2')->applyFromArray($styleArray);
 //                $sheet->getStyle($alphbt.'2')->setAutoSize(true);
@@ -323,26 +372,66 @@ class ClientDashboardController extends Controller
         $sheet->mergeCells('B1:B2');
         $alphbt1 = 'A';
         $Rownumber=3;
+//        dd($list);
          foreach ($list as $k => $v){
+             $amount = number_format((float)$v['value'], 2, '.', '');
+             $value = ($v['type']==2)?('$'.$amount):(($v['type']==3)?($amount."%"):($amount));
+              $day= date('l', strtotime(str_replace('-', '/', $v['date'])));
               if(($k % $fieldcout) == 0){
                   ++$Rownumber;
                   $alphbt1 = 'A';
+                  
+                 
+                  
+                  $spreadsheet->getActiveSheet()->getColumnDimension($alphbt1)->setAutoSize(true);
+                  //value
                   $sheet->setCellValue($alphbt1.$Rownumber, $v['date']);
-                  $sheet->setCellValue(++$alphbt1.$Rownumber, date('l', strtotime(str_replace('-', '/', $v['date']))));
+                  //style
+                  if(($day == 'Sunday') || ($day == 'Saturday')){
+                    $sheet->getStyle($alphbt1.$Rownumber)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor1);
+                  }
+                  $sheet->getStyle($alphbt1.$Rownumber)->applyFromArray($styleArray1);
+                  
+                  //value
+                  $sheet->setCellValue(++$alphbt1.$Rownumber, $day);
+                  //style
+                  if(($day == 'Sunday') || ($day == 'Saturday')){
+                    $sheet->getStyle($alphbt1.$Rownumber)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor1);
+                  }
+//                  $sheet->getStyle($alphbt1.$Rownumber)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor1);
+                  $sheet->getStyle($alphbt1.$Rownumber)->applyFromArray($styleArray1);
+                  
+                  
                   $sheet->setCellValue(++$alphbt1.$Rownumber, '');
               }
               if(in_array(++$alphbt1, $black_alph)){
                   $sheet->setCellValue($alphbt1.$Rownumber, '');
-                  $sheet->setCellValue(++$alphbt1.$Rownumber, round($v['value'],2));
+                  
+                    $sheet->setCellValue(++$alphbt1.$Rownumber, $value);
+                    $spreadsheet->getActiveSheet()->getColumnDimension($alphbt1)->setAutoSize(true);
+                     //style
+                    if(($day == 'Sunday') || ($day == 'Saturday')){
+                    $sheet->getStyle($alphbt1.$Rownumber)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor1);
+                    }
+                    $sheet->getStyle($alphbt1.$Rownumber)->applyFromArray($styleArray1);
               }else{
-                  $sheet->setCellValue($alphbt1.$Rownumber, round($v['value'],2));
+                  $sheet->setCellValue($alphbt1.$Rownumber, $value);
+                  
+                   //style
+                  if(($day == 'Sunday') || ($day == 'Saturday')){
+                    $sheet->getStyle($alphbt1.$Rownumber)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor1);
+                  }
+                    $sheet->getStyle($alphbt1.$Rownumber)->applyFromArray($styleArray1);
+                  $spreadsheet->getActiveSheet()->getColumnDimension($alphbt1)->setAutoSize(true);
               }
         }  
         $spreadsheet->getActiveSheet()->getStyle("A1:".$alphbt."1")->getFont()->setBold( true );
         $spreadsheet->getActiveSheet()->getStyle("A2:".$alphbt."2")->getFont()->setBold( true );
-        $data = date('m-d-Y H:i:s');
+        $data = date('m-d-Y');
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-        $name = $data.'.xlsx';
+//        $name = $data.'.xlsx';
+        $name = $request->clientname.'_'.$request->range.'.xlsx';
+//        dd($name);
         header('Content-Disposition: attachment;filename="'.$name.'"');
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Cache-Control: max-age=0');
