@@ -89,7 +89,7 @@
                     <input type="hidden" name="id" value="{{$client}}">
                     <input type="text" name="search_date" id="search_date" class="form-data search_date" placeholder="Select month" autocomplete="off">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <span style="float: center;margin: 400px;">{{$clientName}}</span>
+                    <span style="float: center;margin: 300px;">{{$clientName}}</span>
                 {!! Form::close() !!}   
                 
                 
@@ -107,30 +107,42 @@
             <table class="table table-bordered data-table display nowrap " style="width:100%;">
          <thead style="font-size: 13px;"
             <tr>
+                  <?php $count = 0;
+                 
+                 ?>
                 @foreach($fieldsArray['module'] as $keyM => $valM)
+                   
                     <th rowspan="{{$valM['rowspan']}}" colspan="{{$valM['colspan']}}" style="text-align: center;border: 1px solid black;
        overflow: hidden;
        min-width: 80px;
            padding-left: 1px;
     padding-right: 1px;
     padding-bottom: 1px;
-    padding-top: 1px;" text="center">{{$valM['name']}}</th>
+    padding-top: 1px;
+    background:{{isset($fieldsArray['module2'][$count])?$fieldsArray['module2'][$count]:''}};" text="center">{{$valM['name']}}</th>
+                     <?php $count += $valM['colspan'];?>
                 @endforeach
             </tr>
+            
             <tr>
+               
                 @foreach($fieldsArray['fields'] as $keyM => $valM)
+                @php
+                
+                $count = $keyM+2; @endphp
                     <th  style="text-align: center;border: 1px solid black;
        overflow: hidden;
        min-width: 80px;
        padding-left: 1px;
     padding-right: 1px;
     padding-bottom: 1px;
-    padding-top: 1px;" text="center">{{$valM}}</th>
+    padding-top: 1px;
+    background: {{isset($fieldsArray['module2'][$count])?$fieldsArray['module2'][$count]:''}} ;" text="center">{{$valM}}</th>
                 @endforeach
             </tr>
         </thead>
         <tbody>
-           
+               
                 @if(count($fieldsArray['value']) > 0)
                 @foreach($fieldsArray['value'] as $keyM => $valM)
                 <tr>
@@ -146,12 +158,14 @@
                         {{date('l', strtotime(str_replace('-', '/', $keyM)))}}
                         </td>
                     @foreach($valM as $keyMM => $valMM)
+                     @php $count = $keyMM+2; @endphp
                         @if(in_array($keyMM,[0,34,36,38,40]))
-                        <td style="padding:0px;text-align: center;border: 1px solid black;">{{$valMM}}</td>
+                        <td style="padding:0px;text-align: center;border: 1px solid black; background: {{isset($fieldsArray['module2'][$count])?$fieldsArray['module2'][$count]:''}}">{{$valMM}}</td>
                         @else
-                        <td style="padding:0px;text-align: center;border: 1px solid black;">{{number_format($valMM,2)}}</td>
+                        <td style="padding:0px;text-align: center;border: 1px solid black; background: {{isset($fieldsArray['module2'][$count])?$fieldsArray['module2'][$count]:''}}">{{number_format($valMM,2)}}</td>
                         @endif
                     @endforeach
+                    
                      <!--<td style="padding:0px;text-align: center;">Action</td>-->
                 </tr>
                 @endforeach
@@ -164,9 +178,11 @@
         </tbody>
         <tfoot align="right">
             <tr>
+                <th></th><th></th>
                 @foreach($fieldsArray['fields'] as $keyM => $valM)
-                <th></th>
+                <th  style="padding:0px;text-align: center;border: 1px solid black; background:{{isset($fieldsArray['module2'][$keyM])?$fieldsArray['module2'][$keyM+2]:''}}" id="{{$keyM}}"></th>
                 @endforeach
+                
         </tfoot>
 <!--        <thead>
             <tr>
@@ -230,9 +246,19 @@
     var year=date.getFullYear(); //get year
 var month=date.getMonth(); //get month
 var count={{count($fieldsArray['fields'])}};
+count=count+1;
+console.dir(count);
+
 function example(count) {
           this["actualLng" + count] = 'something ' + count;
       }
+      $('#search_date').datepicker({ 
+        autoclose: true,   
+        format: "mm-yyyy",
+        viewMode: "months", 
+        minViewMode: "months",
+//        startDate: new Date(year, month, '01'), //set it here
+    });
       var vars = {};
     $('.data-table').DataTable({
         "bFilter": false,
@@ -246,44 +272,41 @@ function example(count) {
 ////            extend: 'colvis',
 ////            columns: ':not(:first-child)'
 //        ],
-//            "footerCallback": function ( row, data, start, end, display ) {
-//            var api = this.api(), data;
-//            // converting to interger to find total
-//            var intVal = function ( i ) {
-//                return typeof i === 'string' ?
-//                    i.replace(/[\$,]/g, '')*1 :
-//                    typeof i === 'number' ?
-//                        i : 0;
-//            };
-//              $.each(new Array(count),function(n){
-//                  var nNew = n + 1;
-//                   vars['actualLng' + nNew]  = api
-//                    .column( nNew )
-//                    .data()
-//                    .reduce( function (a, b) {
-//                        return intVal(a) + intVal(b);
-//                    }, 0 );
-//                }
-//               );	
-//            // Update footer by showing the total with the reference of the column index 
-//	    $( api.column( 0 ).footer() ).html('Total');
-//         $.each(new Array(count),function(n){
-//              var nNew = n + 1;
-//               $( api.column( nNew ).footer() ).html(vars['actualLng' + nNew] );
-//            });
-//        },
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+            // converting to interger to find total
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+              $.each(new Array(count),function(n){
+                  console.dir(n);
+                  var nNew = n + 1;
+                   vars['actualLng' + nNew]  = api
+                    .column( nNew )
+                    .data()
+                    .reduce( function (a, b) {
+                        var te =intVal(a) + intVal(b);
+                        return te.toFixed(2)=='NaN'?'':te.toFixed(2);
+                    }, 0 );
+                }
+               );	
+            // Update footer by showing the total with the reference of the column index 
+            $( api.column( 0 ).footer() ).html('Total');
+            
+            $.each(new Array(count),function(n){
+               var nNew = n + 1;
+               $( api.column( nNew ).footer() ).html(vars['actualLng' + nNew] );
+            });
+        },
 //        "processing": true,
 //        "searchable": false,
 //        "ajax": "server.php"
 //            ],
     });
-    $('#search_date').datepicker({ 
-        autoclose: true,   
-        format: "mm-yyyy",
-        viewMode: "months", 
-        minViewMode: "months",
-//        startDate: new Date(year, month, '01'), //set it here
-    });
+    
       
    </script>
 @endsection

@@ -121,6 +121,8 @@ class ClientDashboardController extends Controller
             'Insurance + Patient AR Total'=>'azure',
             'Daily Collection Details'=>'burlywood',
             'Medicare Financial'=>'bisque',
+            'Daily Obtained Referra'=>'thistle',
+            'Denied Charges'=>'tan',
             ];
          $newFA['module2'][] = '';
          $newFA['module2'][] = '';
@@ -436,9 +438,11 @@ class ClientDashboardController extends Controller
         $alphbt1 = 'A';
         $Rownumber=3;
 //        dd($list);
+        $countArray = [];
          foreach ($list as $k => $v){
              $amount = number_format((float)$v['value'], 2, '.', '');
              $value = ($v['type']==2)?('$'.$amount):(($v['type']==3)?($amount."%"):($amount));
+             $valueRow = $amount;
               $day= date('l', strtotime(str_replace('-', '/', $v['date'])));
               if(($k % $fieldcout) == 0){
                   ++$Rownumber;
@@ -457,6 +461,7 @@ class ClientDashboardController extends Controller
                   
                   //value
                   $sheet->setCellValue(++$alphbt1.$Rownumber, $day);
+                  
                   //style
                   if(($day == 'Sunday') || ($day == 'Saturday')){
                     $sheet->getStyle($alphbt1.$Rownumber)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor1);
@@ -471,6 +476,7 @@ class ClientDashboardController extends Controller
                   $sheet->setCellValue($alphbt1.$Rownumber, '');
                   
                     $sheet->setCellValue(++$alphbt1.$Rownumber, $value);
+                     $countArray[$alphbt1][$Rownumber] = $valueRow;
                     $spreadsheet->getActiveSheet()->getColumnDimension($alphbt1)->setAutoSize(true);
                      //style
                     if(($day == 'Sunday') || ($day == 'Saturday')){
@@ -479,6 +485,7 @@ class ClientDashboardController extends Controller
                     $sheet->getStyle($alphbt1.$Rownumber)->applyFromArray($styleArray1);
               }else{
                   $sheet->setCellValue($alphbt1.$Rownumber, $value);
+                  $countArray[$alphbt1][$Rownumber] = $valueRow;
                   
                    //style
                   if(($day == 'Sunday') || ($day == 'Saturday')){
@@ -487,7 +494,12 @@ class ClientDashboardController extends Controller
                     $sheet->getStyle($alphbt1.$Rownumber)->applyFromArray($styleArray1);
                   $spreadsheet->getActiveSheet()->getColumnDimension($alphbt1)->setAutoSize(true);
               }
-        }  
+        }
+        $Rownumber = ++$Rownumber;
+        foreach($countArray as $key=>$value){
+            $Total = number_format(array_sum($value),'2');
+            $sheet->setCellValue($key.$Rownumber, $Total);
+        }
         $spreadsheet->getActiveSheet()->getStyle("A1:".$alphbt."1")->getFont()->setBold( true );
         $spreadsheet->getActiveSheet()->getStyle("A2:".$alphbt."2")->getFont()->setBold( true );
         $data = date('m-d-Y');
