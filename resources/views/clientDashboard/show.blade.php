@@ -246,8 +246,8 @@
     var year=date.getFullYear(); //get year
 var month=date.getMonth(); //get month
 var count={{count($fieldsArray['fields'])}};
-count=count+1;
-console.dir(count);
+var count=++count;
+console.dir('count : ' + count);
 
 function example(count) {
           this["actualLng" + count] = 'something ' + count;
