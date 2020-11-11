@@ -153,7 +153,10 @@ class ClientDashboardController extends Controller
     
     
     public function generateentry (Request $request) {
-        
+        echo ini_get('max_execution_time');
+        ini_set('max_execution_time', 6000);
+        echo ini_get('max_execution_time');
+        dd();
         $data  = $request->toArray();
         $action = 'Generate entry';
         if(isset( $data['date'])){
