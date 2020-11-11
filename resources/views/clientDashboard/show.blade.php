@@ -145,7 +145,15 @@
                
                 @if(count($fieldsArray['value']) > 0)
                 @foreach($fieldsArray['value'] as $keyM => $valM)
+                @php
+                    $day= date('l', strtotime(str_replace('-', '/', $keyM)));
+                    
+                @endphp
+                @if(($day == 'Sunday') || ($day == 'Saturday'))
+                <tr style=" background:cornflowerblue;">
+                @else
                 <tr>
+                @endif
                     <td style="padding:0px;text-align: center;border: 1px solid black;overflow: hidden;min-width: 85px;">
                         @if($fieldsArray['diff'][$keyM])
                         <a href="{{ route('clientdashboard.edit',['id'=>$client,'date'=>$keyM]) }}">{{$keyM}}</a>
