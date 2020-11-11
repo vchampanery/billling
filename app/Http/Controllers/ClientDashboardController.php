@@ -201,7 +201,7 @@ class ClientDashboardController extends Controller
                 $newdata[$value['client_master_id']] = $value['software_master_id'];
             }
             foreach($newdata as $clientId=>$softId){
-                echo "client id : ".$clientId." softwareid : ".$softId."<br>";
+//                echo "client id : ".$clientId." softwareid : ".$softId."<br>";
                 $softFieldObj = SoftwareFieldMaster::where('software_master_id', $softId)->pluck('software_field_master_id')->toArray();
                 
 //                dd($softFieldObj);
@@ -225,12 +225,13 @@ class ClientDashboardController extends Controller
 //                    ReportMaster::Create($reportAry);
 //                    dump($reportAry);
                     ReportMaster::insert($reportAry);
-                    echo $listkey." ".$listvalue."<br>";
+//                    echo $listkey." ".$listvalue."<br>";
                 }
             }
-            dd();
+//            dd();
             
-            foreach ($data['client_master_ids'] as $clientKey => $clientVlu) {
+            
+            /*foreach ($data['client_master_ids'] as $clientKey => $clientVlu) {
 
 //                $softObj = ClientMaster::where('client_master_id', $clientVlu)->first(['software_master_id']);
 //                $softId  = $softObj['software_master_id'];
@@ -257,7 +258,7 @@ class ClientDashboardController extends Controller
                         
                     }
                 }
-            }
+            }*/
             return redirect()->route('clientdashboard.show')->with('success','Entry Generated successfully');
         }   else {
             $clientList = ClientMaster::all()->toArray();
