@@ -158,11 +158,11 @@
                         {{date('l', strtotime(str_replace('-', '/', $keyM)))}}
                         </td>
                     @foreach($valM as $keyMM => $valMM)
-                     @php $count = $keyMM+2; @endphp
+                     @php $count1 = $keyMM+2; @endphp
                         @if(in_array($keyMM,[0,34,36,38,40]))
-                        <td style="padding:0px;text-align: center;border: 1px solid black; background: {{isset($fieldsArray['module2'][$count])?$fieldsArray['module2'][$count]:''}}">{{$valMM}}</td>
+                        <td style="padding:0px;text-align: center;border: 1px solid black; background: {{isset($fieldsArray['module2'][$count1])?$fieldsArray['module2'][$count1]:''}}">{{$valMM}}</td>
                         @else
-                        <td style="padding:0px;text-align: center;border: 1px solid black; background: {{isset($fieldsArray['module2'][$count])?$fieldsArray['module2'][$count]:''}}">{{number_format($valMM,2)}}</td>
+                        <td style="padding:0px;text-align: center;border: 1px solid black; background: {{isset($fieldsArray['module2'][$count1])?$fieldsArray['module2'][$count1]:''}}">{{number_format($valMM,2)}}</td>
                         @endif
                     @endforeach
                     
@@ -180,7 +180,8 @@
             <tr>
                 <th></th><th></th>
                 @foreach($fieldsArray['fields'] as $keyM => $valM)
-                <th  style="padding:0px;text-align: center;border: 1px solid black; background:{{isset($fieldsArray['module2'][$keyM+2])?$fieldsArray['module2'][$keyM+2]:''}}" id="{{$keyM}}"></th>
+                <th  style="padding:0px;text-align: center;border: 1px solid black; 
+                     background:{{isset($fieldsArray['module2'][$keyM+2])?$fieldsArray['module2'][$keyM+2]:''}}" id="{{$keyM}}"></th>
                 @endforeach
                 
         </tfoot>
