@@ -191,20 +191,47 @@ class ClientDashboardController extends Controller
                     $list[] = date('m-d-Y', $time);
             }
             $user = auth()->user()->id;
+            
+            $softObj = ClientMaster::whereIn('client_master_id', $data['client_master_ids'])->get(['client_master_id','software_master_id'])->toArray();
+//            dump($softObj);
+//            dd($data);
+//            $softId  = $softObj['software_master_id'];
+            $newdata = [];
+            foreach($softObj as $key=>$value){
+//                dump($value);
+                $newdata[$value['client_master_id']] = $value['software_master_id'];
+            }
+            foreach($newdata as $clientId=>$softId){
+                echo "client id : ".$clientId." softwareid : ".$softId."<br>";
+                $softFieldObj = SoftwareFieldMaster::where('software_master_id', $softId)->pluck('software_field_master_id')->toArray();
+                
+//                dd($softFieldObj);
+                foreach ($list as $listkey => $listvalue) {
+                    foreach ($softFieldObj as $sfkey => $sfvalue) {
+                        if (!ReportMaster::where('client_master_id', $clientId)
+                            ->where('date', $listvalue)
+                            ->where('software_field_master_id', $sfvalue)
+                            ->exists()) {
+                            $reportCreat                           = new ReportMaster();
+                            $reportAry                             = [];
+                            $reportAry['client_master_id']         = $clientId;
+                            $reportAry['date']                     = $listvalue;
+                            $reportAry['software_field_master_id'] = $sfvalue;
+                            $reportAry['value']                    = 0;
+                            $reportAry['updated_by']               = $user;
+                            ReportMaster::Create($reportAry);
+                        }
+                    }
+                    echo $listkey." ".$listvalue."<br>";
+                }
+            }
+            dd();
+            
             foreach ($data['client_master_ids'] as $clientKey => $clientVlu) {
 
-                $softObj = ClientMaster::where('client_master_id', $clientVlu)->first(['software_master_id']);
-                $softId  = $softObj['software_master_id'];
-                
-//                dump($data['client_master_ids']);
-//                $softObj = ClientMaster::whereIn('client_master_id', $data['client_master_ids'])->pluck('software_master_id')->toArray();
-//                dump($softObj);
-//                $softFieldObj = SoftwareFieldMaster::whereIn('software_master_id', [1,3])->pluck('software_field_master_id')->toArray();
-    //            $softId  = $softObj['software_master_id'];
-//                dump($softFieldObj);
-//                dd();
-                
-                try{ 
+//                $softObj = ClientMaster::where('client_master_id', $clientVlu)->first(['software_master_id']);
+//                $softId  = $softObj['software_master_id'];
+
                 $softFieldObj = SoftwareFieldMaster::where('software_master_id', $softId)->get(['software_field_master_id'])->toArray();
                 //date array
                 foreach ($list as $listkey => $listvalue) {
@@ -227,13 +254,6 @@ class ClientDashboardController extends Controller
                         
                     }
                 }
-           
-                
-            } catch (Exception $ex) {
-                dump($ex);
-                exit;
-            }
-            ini_set('max_execution_time', 30);
             }
             return redirect()->route('clientdashboard.show')->with('success','Entry Generated successfully');
         }   else {
