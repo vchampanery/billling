@@ -193,8 +193,7 @@ class ClientDashboardController extends Controller
             $user = auth()->user()->id;
             
             $softObj = ClientMaster::whereIn('client_master_id', $data['client_master_ids'])->get(['client_master_id','software_master_id'])->toArray();
-//            dump($softObj);
-//            dd($data);
+
 //            $softId  = $softObj['software_master_id'];
             $newdata = [];
             foreach($softObj as $key=>$value){
@@ -207,21 +206,25 @@ class ClientDashboardController extends Controller
                 
 //                dd($softFieldObj);
                 foreach ($list as $listkey => $listvalue) {
+                    $reportAry= [];
                     foreach ($softFieldObj as $sfkey => $sfvalue) {
-                        if (!ReportMaster::where('client_master_id', $clientId)
-                            ->where('date', $listvalue)
-                            ->where('software_field_master_id', $sfvalue)
-                            ->exists()) {
-                            $reportCreat                           = new ReportMaster();
-                            $reportAry                             = [];
-                            $reportAry['client_master_id']         = $clientId;
-                            $reportAry['date']                     = $listvalue;
-                            $reportAry['software_field_master_id'] = $sfvalue;
-                            $reportAry['value']                    = 0;
-                            $reportAry['updated_by']               = $user;
-                            ReportMaster::Create($reportAry);
-                        }
+//                        if (!ReportMaster::where('client_master_id', $clientId)
+//                            ->where('date', $listvalue)
+//                            ->where('software_field_master_id', $sfvalue)
+//                            ->exists()) {
+//                            $reportCreat                           = new ReportMaster();
+                            
+                            $reportAry[$sfkey]['client_master_id']         = $clientId;
+                            $reportAry[$sfkey]['date']                     = $listvalue;
+                            $reportAry[$sfkey]['software_field_master_id'] = $sfvalue;
+                            $reportAry[$sfkey]['value']                    = 0;
+                            $reportAry[$sfkey]['updated_by']               = $user;
+//                            ReportMaster::Create($reportAry);
+//                        }
                     }
+//                    ReportMaster::Create($reportAry);
+//                    dump($reportAry);
+                    ReportMaster::insert($reportAry);
                     echo $listkey." ".$listvalue."<br>";
                 }
             }
