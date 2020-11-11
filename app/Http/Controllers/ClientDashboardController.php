@@ -105,11 +105,25 @@ class ClientDashboardController extends Controller
             ->get()->toArray();
         $newFA =[];
         $newFA['module'] =[];
+        $newFA['module1'] =[];
         $newFA['fields'] =[];
         $newFA['value'] =[];
         $newFA['diff'] =[];
         $newFA['module']['Date'] = ['name'=>'Date','rowspan'=>'2','colspan'=>'1'];
         $newFA['module']['Day'] = ['name'=>'Date','rowspan'=>'2','colspan'=>'1'];
+        $s=[
+            'Date'=>'',
+            'Day'=>'',
+            'Visits / Units'=>'antiquewhite',
+            'Billed Charges'=>'aqua',
+            'Insurance  AR Information'=>'aliceblue',
+            'Patient AR Information'=>'beige',
+            'Insurance + Patient AR Total'=>'azure',
+            'Daily Collection Details'=>'burlywood',
+            'Medicare Financial'=>'bisque',
+            ];
+         $newFA['module2'][] = '';
+         $newFA['module2'][] = '';
         foreach($fileMst as $key => $value){
             if(isset($newFA['module'][$value['module_master_name']])){
                 $colsCnt = $newFA['module'][$value['module_master_name']]['colspan'];
@@ -117,10 +131,17 @@ class ClientDashboardController extends Controller
             } else{
                 $newFA['module'][$value['module_master_name']] =['name'=>$value['module_master_name'],'rowspan'=>1,'colspan'=>1]; 
             }
+            if(array_key_exists($value['module_master_name'], $s)){
+                 $newFA['module2'][] = $s[$value['module_master_name']];
+            }
+           
+            $newFA['module1'][] = $value['module_master_name'];
+            
             if(!isset($newFA['module'][$value['field_master_name']])){
                 $newFA['fields'][] =$value['field_master_name']; 
             } 
         }
+        
 //        dd($newFA);
 //        $newFA['module']['Action'] = ['name'=>'Action','rowspan'=>'2','colspan'=>'1'];
         $current = strtotime(date("Y-m-d"));
@@ -153,10 +174,9 @@ class ClientDashboardController extends Controller
     
     
     public function generateentry (Request $request) {
-        echo ini_get('max_execution_time');
+
         ini_set('max_execution_time', 6000);
-        echo ini_get('max_execution_time');
-        dd();
+
         $data  = $request->toArray();
         $action = 'Generate entry';
         if(isset( $data['date'])){
@@ -175,19 +195,28 @@ class ClientDashboardController extends Controller
 
                 $softObj = ClientMaster::where('client_master_id', $clientVlu)->first(['software_master_id']);
                 $softId  = $softObj['software_master_id'];
-
+                
+//                dump($data['client_master_ids']);
+//                $softObj = ClientMaster::whereIn('client_master_id', $data['client_master_ids'])->pluck('software_master_id')->toArray();
+//                dump($softObj);
+//                $softFieldObj = SoftwareFieldMaster::whereIn('software_master_id', [1,3])->pluck('software_field_master_id')->toArray();
+    //            $softId  = $softObj['software_master_id'];
+//                dump($softFieldObj);
+//                dd();
+                
+                try{ 
                 $softFieldObj = SoftwareFieldMaster::where('software_master_id', $softId)->get(['software_field_master_id'])->toArray();
                 //date array
                 foreach ($list as $listkey => $listvalue) {
                     foreach ($softFieldObj as $sfkey => $sfvalue) {
                         //insert into report master
-                        $reportCreat                           = new ReportMaster();
-                        $reportAry                             = [];
-                        $reportAry['client_master_id']         = $clientVlu;
-                        $reportAry['date']                     = $listvalue;
-                        $reportAry['software_field_master_id'] = $sfvalue['software_field_master_id'];
-                        $reportAry['value']                    = 0;
-                        $reportAry['updated_by']               = $user;
+                            $reportCreat                           = new ReportMaster();
+                            $reportAry                             = [];
+                            $reportAry['client_master_id']         = $clientVlu;
+                            $reportAry['date']                     = $listvalue;
+                            $reportAry['software_field_master_id'] = $sfvalue['software_field_master_id'];
+                            $reportAry['value']                    = 0;
+                            $reportAry['updated_by']               = $user;
                         
                         if (!ReportMaster::where('client_master_id', $clientVlu)
                             ->where('date', $listvalue)
@@ -198,6 +227,13 @@ class ClientDashboardController extends Controller
                         
                     }
                 }
+           
+                
+            } catch (Exception $ex) {
+                dump($ex);
+                exit;
+            }
+            ini_set('max_execution_time', 30);
             }
             return redirect()->route('clientdashboard.show')->with('success','Entry Generated successfully');
         }   else {
