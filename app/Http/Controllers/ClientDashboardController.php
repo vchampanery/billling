@@ -497,7 +497,8 @@ class ClientDashboardController extends Controller
         }
         $Rownumber = ++$Rownumber;
         $sheet->setCellValue('A'.$Rownumber, "Total");
-         $sheet->getStyle('A'.$Rownumber)->applyFromArray($styleArray1);
+        $sheet->getStyle('A'.$Rownumber)->applyFromArray($styleArray1);
+        $sheet->getStyle('B'.$Rownumber)->applyFromArray($styleArray1);
         foreach($countArray as $key=>$value){
             $Total = number_format(array_sum($value),'2');
             $sheet->setCellValue($key.$Rownumber, $Total);
