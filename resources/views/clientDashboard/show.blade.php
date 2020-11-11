@@ -180,7 +180,7 @@
             <tr>
                 <th></th><th></th>
                 @foreach($fieldsArray['fields'] as $keyM => $valM)
-                <th  style="padding:0px;text-align: center;border: 1px solid black; background:{{isset($fieldsArray['module2'][$keyM])?$fieldsArray['module2'][$keyM+2]:''}}" id="{{$keyM}}"></th>
+                <th  style="padding:0px;text-align: center;border: 1px solid black; background:{{isset($fieldsArray['module2'][$keyM+2])?$fieldsArray['module2'][$keyM+2]:''}}" id="{{$keyM}}"></th>
                 @endforeach
                 
         </tfoot>
