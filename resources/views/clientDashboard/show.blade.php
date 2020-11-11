@@ -247,7 +247,7 @@
     var year=date.getFullYear(); //get year
 var month=date.getMonth(); //get month
 var count={{count($fieldsArray['fields'])}};
-//var count=++count;
+var count=++count;
 console.dir('count : ' + count);
 
 function example(count) {

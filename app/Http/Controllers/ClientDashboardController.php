@@ -496,10 +496,14 @@ class ClientDashboardController extends Controller
               }
         }
         $Rownumber = ++$Rownumber;
+        $sheet->setCellValue('A'.$Rownumber, "Total");
+         $sheet->getStyle('A'.$Rownumber)->applyFromArray($styleArray1);
         foreach($countArray as $key=>$value){
             $Total = number_format(array_sum($value),'2');
             $sheet->setCellValue($key.$Rownumber, $Total);
+            $sheet->getStyle($key.$Rownumber)->applyFromArray($styleArray1);
         }
+        
         $spreadsheet->getActiveSheet()->getStyle("A1:".$alphbt."1")->getFont()->setBold( true );
         $spreadsheet->getActiveSheet()->getStyle("A2:".$alphbt."2")->getFont()->setBold( true );
         $data = date('m-d-Y');
