@@ -76,7 +76,10 @@ class ClientDashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request) {
-        $client = isset($request->id)?$request->id:1;
+        $client = isset($request->id)?$request->id:null;
+        if(!$client){
+            return redirect()->route('userdashboard.show');
+        }
         $list = ClientMaster::where('client_master_id',$client)
             ->first();
         $clientName = $list->client_master_name;
