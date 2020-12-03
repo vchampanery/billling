@@ -125,28 +125,28 @@ class WebPortalController extends Controller
                 ),
             ),
         );
-        $sheet->getStyle("C1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("C2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("D1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("D2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("E1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("E2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("F1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("F2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("G1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("G2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("H1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("H2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("I1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("I2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-        $sheet->getStyle("J1")->applyFromArray($styleArray)->getAlignment()
+        $sheet->getStyle("J2")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet->setCellValue('C2', 'Sr.');
