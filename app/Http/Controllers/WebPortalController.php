@@ -197,7 +197,7 @@ class WebPortalController extends Controller
 ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
             $sheet->getStyle("J$i")->applyFromArray($styleArray)->getAlignment()
 ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER)
-->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER)->setWrapText(true);;
             $sheet->setCellValue("C$i", $srno);
             $sheet->setCellValue("D$i", $value->web_portal_insurance_pms);
             $sheet->setCellValue("E$i", $value->web_portal_username);
