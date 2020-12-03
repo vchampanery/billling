@@ -33,7 +33,21 @@ Route::get('roles/yjraindex','RoleController@yjraindex')->name('roles.yjraindex'
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/webportal', 'WebPortalController@index')->name('webportal.index');
+//Route::any('/webportal/show','WebPortalController@index@show')->name('clientdashboard.show');
 
+
+Route::prefix('webportal')->group(function () {
+    Route::any('','WebPortalController@index')->name('webportal.index');
+    Route::any('show','WebPortalController@show')->name('webportal.show');
+    Route::get('create','WebPortalController@create')->name('webportal.create');
+    Route::post('store','WebPortalController@store')->name('webportal.store');
+//    Route::post('store','ClientDashboardController@store')->name('clientdashboard.store');
+    Route::get('edit/{id}','WebPortalController@edit')->name('webportal.edit');
+    Route::get('download/{id}','WebPortalController@download')->name('webportal.download');
+ });
+
+    
 //check user login before controller and action..
 
 Route::group(['middleware' => ['auth']], function() {

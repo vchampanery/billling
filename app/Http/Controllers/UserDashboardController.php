@@ -68,14 +68,64 @@ class UserDashboardController extends Controller
         $user = isset(auth()->user()->id)?auth()->user()->id:2; 
          $roles = auth()->user()->roles->pluck('name')->toArray();
          if($roles[0] == 'admin'){
-             $list = \App\Model\ClientMaster::get(['client_master_id','client_master_name']);
+             $list = \App\Model\ClientMaster::get(['client_master_id','client_master_name','software_master_id']);
          } else {
             $list = UserAssignMaster::where('user_master_id',$user)
             ->join('client_master', 'client_master.client_master_id', '=', 'user_assign_master.client_master_id')
-            ->get(['user_assign_master.client_master_id','client_master.client_master_name']);
+            ->get(['user_assign_master.client_master_id','client_master.client_master_name','client_master.software_master_id']);
          }
-        
-             
+            $currentmonth = date('m');
+            $currentyear= date('Y');
+            
+            foreach($list as $key=>$value){
+//                dump($value);
+//                if($value->client_master_id == 1){ 
+                    $er = \App\Model\ReportMaster::where('client_master_id',$value->client_master_id);
+                    if($value->software_master_id == 3){
+                        $er->WhereIn('software_field_master_id',[120,121] );
+                    }
+                    if($value->software_master_id == 2){
+                        $er->WhereIn('software_field_master_id',[86,85] );
+                    }
+                    if($value->software_master_id == 1){
+                        $er->WhereIn('software_field_master_id',[38,39] );
+                    }
+                    $ree = $er->Where('date', 'like', $currentmonth . '-__-'.$currentyear)
+                        ->get()->toArray();
+//                    if($value->software_master_id == 3){
+                    $insurance = $patient = 0; 
+                   
+                    foreach($ree as $rk=>$re){
+                        
+                        if($value->software_master_id == 1){
+                            if($re['software_field_master_id'] == 38){
+                                $insurance += $re['value'];
+                            }
+                            if($re['software_field_master_id']== 39){
+                                $patient += $re['value'];
+                            }
+                        } 
+                        if($value->software_master_id == 2){
+                            if($re['software_field_master_id'] == 85){
+                                $insurance += $re['value'];
+                            }
+                            if($re['software_field_master_id']== 86){
+                                $patient += $re['value'];
+                            }
+                        } 
+                        if($value->software_master_id == 3){
+                            if($re['software_field_master_id'] == 120){
+                                $insurance += $re['value'];
+                            }
+                            if($re['software_field_master_id']== 121){
+                                $patient += $re['value'];
+                            }
+                        } 
+                    }
+                    $value->insurance = $insurance;
+                    $value->patient = $patient;
+            } 
+//            dd($list);
         return view('userDashboard.show',compact('list'));
     }
     

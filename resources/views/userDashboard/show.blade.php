@@ -57,14 +57,28 @@
 				<div class="row" style="width: 50%;margin: auto;width: 35%;padding: 10px;">
 				      <label for="lname" class='ce'>Client Name</label>
 				</div>
-                @foreach($list as $keyl => $vall)
-				<div class="row" style="width: 50%;margin: auto;width: 35%;padding: 10px;">
-				    
-                        <a href="{{ route('clientdashboard.show',['id'=>$vall->client_master_id]) }}">{{$vall->client_master_name}}</a>
-
-				</div>
-                @endforeach
-
+                <table border="2">
+                    <thead style="text-align: center;">
+                        <tr>
+                            <th rowspan="2">Client name</th>
+                        <th colspan="2">Collection till today</th>
+                        </tr>
+                        <tr>
+                          
+                        <th>Insurance</th>
+                        <th>patient</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         @foreach($list as $keyl => $vall)
+                         <tr>
+                             <td style="padding: 5px;"><a href="{{ route('clientdashboard.show',['id'=>$vall->client_master_id]) }}">{{$vall->client_master_name}}</a></td>
+                             <td style="padding: 5px;">${{number_format($vall->insurance,2)}}</td>
+                             <td style="padding: 5px;">${{number_format($vall->patient,2)}}</td>
+                         </tr>
+                         @endforeach
+                    </tbody>
+                </table>
 		</div>
    
 @endsection

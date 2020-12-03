@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -25,6 +25,11 @@ class HomeController extends Controller
     {
         
         return view('home');
+    }
+    public function index1()
+    {
+        
+        return response()->json(['autogenerate_name'=>'test','status'=>true]);
     }
     public function calender(){
         return view('calender');

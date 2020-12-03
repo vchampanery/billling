@@ -96,7 +96,7 @@ trait GeneralTrait
                 //unbilled amount %
                 $data[20] =round(0,2);
             }
-            $data[40]=$data[38]+$data[39];
+            $data[40]=$data[38]+$data[39]; //Daily Collection Details	
     //Insurance + Patient AR Total
             $data[33]=$data[7]+$data[21];
             $data[34]=$data[9]+$data[23];
@@ -188,7 +188,7 @@ trait GeneralTrait
                 $data[113] =round(0,2);
             }
     //Insurance + Patient AR Total
-            $data[122]=$data[120]+$data[121];
+            $data[122]=$data[120]+$data[121]; //Daily Collection Details	
             $data[115]=$data[91]+$data[103];
             $data[116]=$data[93]+$data[105];
             $data[117]=$data[95]+$data[107];
@@ -289,7 +289,7 @@ trait GeneralTrait
                 $data[77] =round(0,2);
             }
             
-            $data[87]=$data[86]+$data[85];
+            $data[87]=$data[86]+$data[85]; //Daily Collection Details	
             
     //Insurance + Patient AR Total
             $data[78]=$data[46]+$data[62];
