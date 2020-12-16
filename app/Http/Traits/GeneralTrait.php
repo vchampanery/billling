@@ -98,11 +98,11 @@ trait GeneralTrait
             }
             $data[40]=$data[38]+$data[39]; //Daily Collection Details	
     //Insurance + Patient AR Total
-            $data[33]=$data[7]+$data[21];
-            $data[34]=$data[9]+$data[23];
-            $data[35]=$data[11]+$data[25];
-            $data[36]=$data[13]+$data[27];
-            $data[37]=$data[15]+$data[29];
+            $data[33]=round($data[7]+$data[21],2);
+            $data[34]=round($data[9]+$data[23],2);
+            $data[35]=round($data[11]+$data[25],2);
+            $data[36]=round($data[13]+$data[27],2);
+            $data[37]=round($data[15]+$data[29],2);
         } else if($swMstrId == 3){ // athina
             //Insurance  AR Information
 //            $data[5] = 0;
@@ -188,12 +188,12 @@ trait GeneralTrait
                 $data[113] =round(0,2);
             }
     //Insurance + Patient AR Total
-            $data[122]=$data[120]+$data[121]; //Daily Collection Details	
-            $data[115]=$data[91]+$data[103];
-            $data[116]=$data[93]+$data[105];
-            $data[117]=$data[95]+$data[107];
-            $data[118]=$data[97]+$data[109];
-            $data[119]=$data[99]+$data[111];
+            $data[122]=round($data[120]+$data[121],2); //Daily Collection Details	
+            $data[115]=round($data[91]+$data[103],2);
+            $data[116]=round($data[93]+$data[105],2);
+            $data[117]=round($data[95]+$data[107],2);
+            $data[118]=round($data[97]+$data[109],2);
+            $data[119]=round($data[99]+$data[111],2);
         }else if($swMstrId == 2){ // ecw
             //Insurance  AR Information
 //            $data[5] = 0;
@@ -292,13 +292,13 @@ trait GeneralTrait
             $data[87]=$data[86]+$data[85]; //Daily Collection Details	
             
     //Insurance + Patient AR Total
-            $data[78]=$data[46]+$data[62];
-            $data[79]=$data[48]+$data[64];
-            $data[80]=$data[50]+$data[66];
-            $data[81]=$data[52]+$data[68];
-            $data[82]=$data[54]+$data[70];
-            $data[83]=$data[56]+$data[72];
-            $data[84]=$data[58]+$data[74];
+            $data[78]=round($data[46]+$data[62],2);
+            $data[79]=round($data[48]+$data[64],2);
+            $data[80]=round($data[50]+$data[66],2);
+            $data[81]=round($data[52]+$data[68],2);
+            $data[82]=round($data[54]+$data[70],2);
+            $data[83]=round($data[56]+$data[72],2);
+            $data[84]=round($data[58]+$data[74],2);
         }
             return $data;
     }
